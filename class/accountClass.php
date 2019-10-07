@@ -448,7 +448,7 @@ class account extends database{
 		try{
 			$v = $this->toSave($v);
 
-			$struct = ['self'=>['id','id_user','id_account_other','in_out','date','dollar','dinar','type','dollar_rate','in_dollar','depp_balance','balance','detail','id_outdepp'],
+			$struct = ['self'=>['id','id_user','id_account_other','in_out','date','dollar','dinar','type','dollar_rate','in_dollar','depp_balance','balance','detail','id_outdepp','id_indepp'],
 			'account'=>['source'=>'id_account_other','target'=>'id','column'=>'name','search'=>['name','mobile']],
 			'user'=>['source'=>'id_user','target'=>'id','column'=>'name','search'=>['name','detail']]
 			];
@@ -464,6 +464,16 @@ class account extends database{
 				if($data['rows'][$i]['id_outdepp']){
 					$sql = "SELECT  if (length(oe.detail),concat(p.name,'\n :',oe.detail),p.name) as name,oe.qty,TRIM(TRAILING '.00' FROM oe.cost) as cost,TRIM(TRAILING '.00' FROM oe.qty*oe.cost) as total from outdepp_extra oe left join product p on p.id = oe.id_product
 						where oe.id_outdepp = {$data['rows'][$i]['id_outdepp']}";
+					$result = $this->pdo->query($sql);
+					$data['rows'][$i]['mini']  = $result->fetchAll(PDO::FETCH_ASSOC);
+				}
+				//$data['rows'][$i]['detail'] = implode(",",$data['rows'][$i])
+				if($data['rows'][$i]['in_dollar'] == 0 ){
+					array_splice($data['rows'],$i,1);
+				}
+				if($data['rows'][$i]['id_indepp']){
+					$sql = "SELECT  if (length(oe.detail),concat(p.name,'\n :',oe.detail),p.name) as name,oe.qty,TRIM(TRAILING '.00' FROM oe.cost) as cost,TRIM(TRAILING '.00' FROM oe.qty*oe.cost) as total from indepp_extra oe left join product p on p.id = oe.id_product
+						where oe.id_indepp = {$data['rows'][$i]['id_indepp']}";
 					$result = $this->pdo->query($sql);
 					$data['rows'][$i]['mini']  = $result->fetchAll(PDO::FETCH_ASSOC);
 				}
