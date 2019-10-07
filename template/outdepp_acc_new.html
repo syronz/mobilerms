@@ -1,0 +1,30 @@
+<section class="content" id="printThis">
+	<div class="box">
+		<div class="box-body">
+			<div id="invoice" class="invoiceStyle">
+				<h3><d>outdepp_acc_new</d></h3>
+				<div class="information">
+					<outdepp-header></outdepp-header>
+					<new-customer></new-customer>
+				</div>
+			</div>
+			<div class="mainInvoice" ng-show="invoice.id_account">
+				<outdepp-body-two-step></outdepp-body-two-step>
+				<outdepp-pay></outdepp-pay>
+				<div class="col-md-10">
+					<div class="alert alert-warning alert-dismissable" ng-show="errorShow">
+						<button type="button" class="close" ng-click="toggleError()">×</button>
+						<h4 style="margin-bottom: 0;" class="{{tr}}" ><i class="icon fa fa-warning"></i> <d>Alert</d> <span ng-repeat="m in errorMessage">{{dic(m.field)}} - {{dic(m.content)}} {{m.extra}}</span></h4>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<button class="btn btn-primary pull-right"  ng-click="saveInvoice()"  ng-disabled="lockForm"><d>Save</d></button>
+				</div>
+			</div>
+		</div>
+
+	</div><!-- /.box-body -->
+</div><!-- /.box -->
+</section>
+
+

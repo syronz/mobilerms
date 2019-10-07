@@ -1,0 +1,41 @@
+<div>
+	<div class="col-md-4">
+		<div class="form-group">
+			<label for="invoice" class="control-label"><d>invoice</d>:</label>
+			<input class="form-control" id="invoice" ng-model="invoice.invoice" name="invoice">
+		</div>
+		<div class="form-group">
+			<label for="accountType" class="control-label"><d>accountType</d>:</label>
+			<select class="form-control" id="accountType" ng-change="getAccounts()" ng-model="invoice.accountType" name="accountType" required>
+				<option value="noAccount"><d>NoAccount</d></option>
+				<option value="company"><d>Company</d></option>
+				<option value="customer"><d>Customer</d></option>
+				<option value="partner"><d>Partner</d></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="account" class="control-label"><d>account</d>:</label>
+			<select class="form-control" id="account" ng-model="invoice.id_account" name="account" required>
+				<option ng-repeat="account in accountList" value="{{account.id}}">{{account.name}}</option>								
+			</select>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="form-group">
+			<label for="type" class="control-label"><d>type</d>:</label>
+			<select class="form-control" id="type" ng-model="invoice.type" name="type">
+				<option value="active"><d>active</d></option>
+				<option value="just_show"><d>just_show</d></option>
+				<option value="cancel"><d>cancel</d></option>
+				<option value="freeze"><d>freeze</d></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="userDeppAuth" class="control-label"><d>userDeppAuth</d>:</label>
+			<input type="text" class="form-control" disabled value="{{userDeppAuthSelect.depp + ' ' + userDeppAuthSelect.code}}">
+			<span style="color:#FFF;">{{invoice.id_depp = userDeppAuthSelect.id}}</span>
+		</div>
+
+	</div>
+	<div class="col-md-4"><img  class="pull-right" id="company_logo" src="dist/img/logo.png" alt="Hi Company" width="150" /></div>
+</div>

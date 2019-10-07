@@ -1,0 +1,120 @@
+<section class="content-header" style="height:10px;">
+	<h1>
+		<d>debtsReport</d>
+	</h1>
+</section>
+
+<!-- Main content -->
+<section class="content" id="printThis">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<div class="form-group noPrint row">
+						<div class="col-md-1">
+							<label class="control-label" for="days"><d>Days</d>:</label>
+
+						</div>
+						<div class="col-md-2">
+							<input type="number" ng-model="day"  class="form-control" id="days" name="days" required>
+						</div>
+						<div class="col-md-2">
+						</div>
+						<div class="col-md-2">
+							<label class="control-label" for="accountType"><d>AccountType</d>:</label>
+						</div>
+						
+						<div class="col-md-3">
+							<select class="form-control" id="fromType" ng-model="accountType" name="accountType">
+								<option value="partner">Partner</option>
+								<option value="company">Company</option>
+								<option value="customer">Customer</option>
+								<option value="partner">Partner</option>
+								<option value="expense">Expense</option>
+								<option value="store">Store</option>
+								<option value="cash">Cash</option>
+								<option value="drawing">Drawing</option>
+								<option value="equipment">Equipment</option>
+								<option value="noAccount">NoAccount</option>
+							</select>
+						</div>
+
+						<div class="col-md-2">
+							<button  ng-click="newDebtsReport()" class="btn btn-primary col-md-12"><d>Send</d></button>
+						</div>
+					</div>
+
+
+				</div>
+
+				<div class="col-md-12 box-body bgWhite">
+					<h3><d>debtsReport</d>: <small>{{days}} <d>days</d></small></h3>
+					
+					<table class="table table-bordered dataTable">
+						<tr>
+							<th>#</th>
+							<th><d>Account</d></th>
+							<th><d>Balance 1</d></th>
+							<th><d>Balance 2</d></th>
+							<th><d>Balance 3</d></th>
+							<th class="hide"></th>
+						</tr>
+						<tr ng-repeat-start="p in debtsReportData">
+							<td rowspan="3">{{$index + 1}}</td>
+							<td rowspan="2">{{p.name}}</td>
+							<td>{{p.balance1 | currency}}</td>
+							<td>{{p.balance2 | currency}}</td>
+							<td>{{p.balance3 | currency}}</td>
+							<td class="hide"></td>
+						</tr>
+						<tr>
+							<td>{{p.date1}}</td>
+							<td>{{p.date2}}</td>
+							<td>{{p.date3}}</td>
+							<td class="hide"></td>
+						</tr>
+						<tr ng-repeat-end>
+							<td colspan="4">
+							<table class="table table-bordered table-striped">
+								<tr>
+									<th><d>id</d></th>
+									<th><d>invoice</d></th>
+									<th><d>date</d></th>
+									<th><d>type</d></th>
+									<th><d>status</d></th>
+									<th><d>total</d></th>
+								</tr>
+								<tr ng-repeat="r in p.outdepp">
+									<td>{{r.id}}</td>
+									<td>{{r.invoice}}</td>
+									<td>{{r.date}}</td>
+									<td>{{r.type}}</td>
+									<td><button ng-click="toggleStatus(r)" class="btn btn-xs bg{{r.status}}" ng-disabled="lockForm">{{r.status}}</button></td>
+									<td>{{r.total}}</td>
+								</tr>
+							</table>
+							</td>
+							<td class="hide"></td>
+						</tr>
+					</table>
+				</div>
+
+			</div>
+
+			
+
+
+
+
+			
+		</div>
+
+	</div>
+
+</section>
+<!-- /.content 
+</div>-->
+<!-- /.content-wrapper -->
+
+
+

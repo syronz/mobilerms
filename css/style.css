@@ -1,0 +1,258 @@
+@font-face {
+	font-family: 'Conv_xendanreg';
+	src: url('../fonts/xendanreg.eot');
+	src: local('☺'), url('../fonts/xendanreg.ttf') format('truetype'), url('../fonts/xendanreg.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+body{
+	font-family: 'Conv_xendanreg';
+	font-weight: normal;
+}
+
+h1,.box-title,h4,h3{
+	font-family: 'Conv_xendanreg';
+}
+
+.addBtn{
+	width: 100px;
+	float: right;
+	font-family: courier;
+}
+
+table.dataTable thead .sorting:after {
+	opacity: 0.2;
+	content: "\e150"; /* sort */
+}
+table.dataTable thead .sorting_asc:after {
+	content: "\e155";/* sort-by-attributes */
+}
+table.dataTable thead .sorting_desc:after {
+	content: "\e156"; /* sort-by-attributes-alt */
+}
+
+.toPointer{
+	cursor: pointer;
+}
+
+.limitValue{
+	margin-left: 25px;
+}
+
+.main-header{
+	position: fixed;
+	width: 100%;
+}
+
+.box{
+	margin-top: 38px;
+}
+
+.main-sidebar{
+	position: fixed;
+	overflow-y: auto;
+	height: 100%;
+}
+
+.countTable{
+	float: left;
+}
+
+body{
+	overflow-y: scroll;
+}
+
+.modalError{
+	text-align: center;
+}
+
+.form-signin{
+	margin-top: 50%;
+}
+
+.box-body{
+	overflow-x: auto;
+}
+
+.bigModal .form-control{
+	float: right;
+	width: 50%;
+}
+
+.bigModal .form-group{
+	text-align: right;
+}
+
+.bigModal .control-label{
+	margin-bottom: 0;
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+.red{
+	color: red;
+}
+
+.green{
+	color: green;
+}
+
+.ltr{
+	direction: ltr;
+}
+
+.rtl{
+	direction: rtl;
+}
+
+.compressP{
+	margin: 0;
+}
+
+.gray{
+	color: gray;
+}
+
+/* invoice*/
+.invoiceStyle h3{
+	background-color:#357EBD;
+	color:#FFF;
+	padding: 5px;
+	text-align: center;
+}
+.invoiceStyle label {
+	/* border: 1px solid green; */
+	width: 80px;
+	display: -webkit-inline-box;
+	margin-top: 3px;
+	/*font-size: 13px;*/
+}
+
+.invoiceStyle .information input,.invoiceStyle .information select{
+	width: 70%;
+	float: right;
+}
+
+
+
+
+/* cardPage */
+.cardPage h3{
+	text-align: center;
+}
+
+.cardPage .alert-success{
+	margin: 15px 0;
+}
+
+.cardPage .bg-warning{
+	margin: 15px 0;
+	padding: 10px;
+	font-size: 1.2em;
+}
+
+
+/*lockscreen*/
+.lockscreen-footer{
+
+	bottom: 10px;
+	margin-top: 160px;
+}
+
+.lockscreen{
+	background:rgba(94, 212, 175, 0.39);
+}
+
+.langBtn{
+	position: absolute;
+	top:10px;
+	left: 10px;
+	width: 160px;
+}
+
+.lockscreen .rtl ul{
+	text-align: right;
+}
+
+.lockscreen .ltr ul{
+	text-align: left;
+}
+
+.lockscreen-name img{
+	width: 90%;
+	margin: 5px auto;
+}
+
+
+.dataTable button{
+	margin-top: 5px;
+}
+
+
+.userAuthDepp{
+	margin-top: 11px;
+	background-color: #3C8DBC;
+	color: #FFF;
+	border: 1px solid white;
+	padding: 2px 15px 2px 1px;
+}
+
+
+.invoiceStyle .table>tbody>tr>td{
+	vertical-align: middle;
+}
+
+.bigNumber{
+	font-family: Calibri;
+	font-size: 22px;
+}
+
+.btnBoxDsh{
+	min-width: 151px;
+}
+
+#transferModal h3{
+	text-align: center;
+}
+
+.alignCenter{
+	text-align:center;
+}
+
+.timeline{
+	margin-top: -26px;
+}
+
+
+
+.bgWhite{
+	background-color: white;
+}
+
+.bgdone{
+	background-color: #98f398;
+}
+.bgprogress{
+	background-color: yellow;
+}
+
+/* print*/
+td,.calibri{
+	font-family: 'Calibri';
+}
+.xani{
+	font-family: 'Unikurd Xani';font-size:0.5cm;
+}
+h3,.chiman,th{
+	font-family: 'Unikurd Chimen';font-weight: normal;
+}
+p{
+	margin: 0;
+}
+table td{
+	padding: 0 0.3cm 0 0.3cm;
+}
+
+.gray0{
+	background-color: #EEEEEE;
+}

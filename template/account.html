@@ -1,0 +1,121 @@
+<section class="content" id="printThis">
+	<div class="box">
+		<div class="box-header">
+			<h3 class="box-title"><d>accountTable</d></h3>
+			<button class="btn btn-primary btn-xs addBtn noPrint" data-toggle="modal" data-target="#appModal"  ng-click="add()"><d>addNew</d></button>
+		</div><!-- /.box-header -->
+		<div class="box-body">
+			<table class="table table-bordered table-striped dataTable">
+				<thead>
+					<tr>
+						<th class="{{checkSort('id')}}" id="id" ng-click="sorting('id')"><d>id</d></th>
+						<th class="{{checkSort('name')}}" id="name" ng-click="sorting('name')"><d>name</d></th>
+						<th class="{{checkSort('type')}}" id="type" ng-click="sorting('type')"><d>type</d></th>
+						<th class="{{checkSort('serial')}}" id="serial" ng-click="sorting('serial')"><d>serial</d></th>
+						<th class="{{checkSort('mobile')}}" id="mobile" ng-click="sorting('mobile')"><d>mobile</d></th>
+						<th class="{{checkSort('phone')}}" id="phone" ng-click="sorting('phone')"><d>phone</d></th>
+						<th class="{{checkSort('email')}}" id="email" ng-click="sorting('email')"><d>email</d></th>
+						<th class="{{checkSort('address')}}" id="address" ng-click="sorting('address')"><d>address</d></th>
+						<th class="{{checkSort('detail')}}" id="detail" ng-click="sorting('detail')"><d>detail</d></th>
+						<th id="balance" ><d>Balance</d></th>
+						<th><d>action</d></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in accountList">
+						<td>{{item.id}}</td>
+						<td>{{item.name}}</td>
+						<td>{{item.type}}</td>
+						<td>{{item.serial}}</td>
+						<td>{{item.mobile}}</td>
+						<td>{{item.phone}}</td>
+						<td>{{item.email}}</td>
+						<td>{{item.address}}</td>
+						<td>{{item.detail}}</td>
+						<td>{{item.balance}}</td>
+						<td>
+							<div class="btnBoxDsh">
+								<button class="btn btn-warning btn-xs noPrint" data-toggle="modal" data-target="#appModal" ng-click="edit(item)"><d>edit<default/d></button>
+								<button class="btn btn-danger btn-xs noPrint" data-toggle="modal" data-target="#appModal" ng-click="delete(item)"><d>delete</d></button>
+								<button class="btn btn-success btn-xs noPrint" data-toggle="modal" ng-click="view(item)"><d>view</d></button>
+							</div>
+						</td>
+					</tr>
+				</table>
+				<pagination></pagination>
+
+			</div><!-- /.box-body -->
+		</div><!-- /.box -->
+	</section>
+
+
+	<div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-labelledby="DiakoModal">
+	<div class="modal-dialog modal-md" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="appModalLabel">{{modalTitle}}</h4>
+				</div>
+				<div class="modal-body">
+					<form name="mForm">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="name" class="control-label"><d>name</d>:</label>
+								<input type="text" class="form-control" id="name" ng-model="modal.name" required>
+							</div>
+							<div class="form-group">
+								<label for="type" class="control-label"><d>type</d>:</label>
+								<select type="text" class="form-control" id="type" ng-model="modal.type" required>
+									<option><d>company</d></option>
+									<option><d>customer</d></option>
+									<option><d>partner</d></option>
+									<option><d>expense</d></option>
+									<option><d>drawing</d></option>
+									<option><d>store</d></option>
+									<option><d>cash</d></option>
+									<option><d>equipment</d></option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="serial" class="control-label"><d>serial</d>:</label>
+								<input type="text" class="form-control" id="serial" ng-model="modal.serial">
+							</div>
+							<div class="form-group">
+								<label for="mobile" class="control-label"><d>mobile</d>:</label>
+								<input type="text" class="form-control" id="mobile" ng-model="modal.mobile">
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="phone" class="control-label"><d>phone</d>:</label>
+								<input type="text" class="form-control" id="phone" ng-model="modal.phone">
+							</div>
+							<div class="form-group">
+								<label for="email" class="control-label"><d>email</d>:</label>
+								<input type="text" class="form-control" id="email" ng-model="modal.email">
+							</div>
+							<div class="form-group">
+								<label for="address" class="control-label"><d>address</d>:</label>
+								<input type="text" class="form-control" id="address" ng-model="modal.address">
+							</div>
+							<div class="form-group">
+								<label for="detail" class="control-label"><d>detail</d>:</label>
+								<input type="text" class="form-control" id="detail" ng-model="modal.detail">
+							</div>
+						</div>
+
+
+					</form>
+					<div>
+						<p ng-repeat="m in errorMessage" class="bg-warning modalError">{{dic(m.field)}} - {{dic(m.content)}} {{m.extra}}</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"  ><d>close</d></button>
+					<button type="button" class="btn btn-primary" ng-click="saveModal()" ng-hide="modalType == 'delete'" ng-disabled="!mForm.$valid || lockForm" ><d>save</d></button>
+					<button type="button" class="btn btn-danger" ng-click="saveModal()" ng-show="modalType == 'delete'" ng-disabled="lockForm"><d>delete</d></button>
+				</div>
+			</div>
+		</div>
+	</div>

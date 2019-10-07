@@ -1,0 +1,170 @@
+<section class="content" id="printThis">
+	<div class="box">
+		<div class="box-body">
+			<div id="invoice" class="invoiceStyle">
+				<h3><d>indepp_piece_new</d></h3>
+				<div class="information">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="invoice" class="control-label"><d>invoice</d>:</label>
+							<input class="form-control" id="invoice" ng-model="invoice.invoice" name="invoice">
+						</div>
+						<div class="form-group">
+							<label for="accountType" class="control-label"><d>accountType</d>:</label>
+							<select class="form-control" id="accountType" ng-change="getAccounts()" ng-model="invoice.accountType" name="accountType" required>
+								<option value="noAccount"><d>NoAccount</d></option>
+								<option value="company"><d>Company</d></option>
+								<option value="customer"><d>Customer</d></option>
+								<option value="partner"><d>Partner</d></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="account" class="control-label"><d>account</d>:</label>
+							<select class="form-control" id="account" ng-model="invoice.id_account" name="account" required>
+								<option ng-repeat="account in accountList" value="{{account.id}}">{{account.name}}</option>								
+							</select>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="type" class="control-label"><d>type</d>:</label>
+							<select class="form-control" id="type" ng-model="invoice.type" name="type">
+								<option value="active"><d>active</d></option>
+								<option value="just_show"><d>just_show</d></option>
+								<option value="cancel"><d>cancel</d></option>
+								<option value="freeze"><d>freeze</d></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="userDeppAuth" class="control-label"><d>userDeppAuth</d>:</label>
+							<input type="text" class="form-control" disabled value="{{userDeppAuthSelect.depp + ' ' + userDeppAuthSelect.code}}">
+							<span style="color:#FFF;">{{invoice.id_depp = userDeppAuthSelect.id}}</span>
+							<!-- <select class="form-control" id="userDeppAuth" ng-options="option.depp + ' ' + option.code for option in userDeppAuth track by option.id" ng-model="invoice.userDeppAuth" name="userDeppAuth" >
+						</select> -->
+					</div>
+
+				</div>
+				<div class="col-md-4"><img  class="pull-right" id="company_logo" src="dist/img/logo.png" alt="Hi Company" width="150" /></div>
+			</div>
+			<table class="table table-striped" align="center" >
+				<tr>
+					<th></th>
+					<th style="width:110px;"><d>Code</d></th>
+					<!-- <th><d>Category</d></th> -->
+					<th><d>Brand</d></th>
+					<th><d>Model</d></th>
+					<th><d>Product</d></th>
+					<th><d>description</d></th>
+					<th><d>Cost</d></th>
+					<th><d>Qty</d></th>
+					<th style="width:140px;"><p>Total</p></th>
+				</tr>
+				<tr ng-repeat="item in invoice.items" jq-animate="dropdown;250">
+					<td><a href ng-click="removeItem(item)" class="btn btn-danger btn-sm">x</a></td>
+					<td><input class="form-control" ng-model="item.code" ng-keypress="codeChange($event,item)" placeholder="Code"></td>
+					<td>
+						<!-- <select class="form-control" id="brand" ng-change="updateModelList(item)" ng-model="item.id_brand" name="brand" required>
+							<option ng-repeat="brand in brandList" value="{{brand.id}}">{{brand.name}}</option>
+						</select> -->
+
+						<select class="form-control" id="brand" ng-options="brand.name for brand in brandList track by brand.id" ng-change="updateModelList(item)" ng-model="item.id_brand" name="brand" ></select>
+					</td>
+					<td>
+						<!-- <select class="form-control" id="model" ng-change="updateProductList(item)" ng-model="item.id_model" name="model">
+							<option ng-repeat="model in item.modelList" value="{{model.id}}">{{model.name}}</option>					
+						</select> -->
+						
+						<select class="form-control" id="model" ng-options="model.name for model in item.modelList track by model.id" ng-change="updateProductList(item)" ng-model="item.id_model" name="model" ></select>
+					</td>
+					<td>
+						<!-- <select class="form-control" id="product" ng-change="updatePrice(item)" ng-model="item.id_product" name="product">
+							<option ng-repeat="product in item.productList" value="{{product.id}}">{{product.name}}</option>					
+						</select> -->
+						<select class="form-control" id="product" ng-options="product.name for product in item.productList track by product.id" ng-change="updatePrice(item)" ng-model="item.id_product" name="product" ></select>
+					</td>
+					<td><input class="form-control" ng-model="item.description" type="text" size="6" placeholder="description"></td>
+					<td><input class="form-control" ng-model="item.cost" value="0.00" ng-required ng-validate="number" size="6" placeholder="cost"></td>
+					<td><input class="form-control" ng-model="item.qty" type="number" value="1" size="4" ng-required ng-validate="integer" placeholder="qty"></td>
+
+					<td align="right"><input style="text-align:right;" class="form-control" value="{{item.cost * item.qty | currency}}" disabled> </td>
+
+				</tr>
+				<tr ng-hide="printMode">
+					<td colspan="9"><a class="btn btn-primary btn-sm" href ng-click="addItem()" > + </a></td>
+				</tr>
+				<!-- <tr>
+					<td colspan="8" align="right">
+						<d>SubTotal</d>:
+					</td>
+					<td align="right">
+						{{invoice_sub_total() | currency}}
+					</td>
+				</tr>
+				<tr>
+					<td colspan="8" align="right">
+						<d>Discount</d>(%): <input ng-model="invoice.discount" ng-validate="number" style="width:43px">
+					</td>
+					<td align="right">
+						{{calculate_discount() | currency}}
+					</td>
+				</tr> -->
+				<tr>
+					<td colspan="7" align="left" ng-class="tr">
+						<d>Rate</d>: {{invoice.dollarRate}} 
+						<d>isEqualTo</d><strong> {{invoice.dollarRate * calculate_grand_total() | currency:'IQD ':0}} </strong>
+					</td>
+					<td colspan="1" align="right">
+						<d>SubTotal</d>:
+					</td>
+					<td align="right">
+						{{calculate_grand_total() | currency}}
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="right">
+						<d>Detail</d>:
+					</td>
+					<td colspan="7"align="right">
+						<input class="form-control" ng-model="invoice.detail" type="text" >
+					</td>
+				</tr>
+				<tr>
+					<td colspan="7" align="right">
+						<d>Pay</d>:
+					</td>
+					<td colspan="1" align="right">
+						<input ng-model="invoice.pay.payDinar" placeholder="IQD" ng-validate="number" class="form-control">
+					</td>
+					<td>
+						<input ng-model="invoice.pay.payDollar" placeholder="$" ng-validate="number" class="form-control">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="8" align="right">
+						<d>lessFromAccount</d>:
+						<!-- <input type="checkbox">-<d>NoAccount</d> -->
+					</td>
+					<td align="right">
+						<select class="form-control" id="payAccount" ng-options="option.name for option in accountPayList track by option.id" ng-model="invoice.pay.id_account" name="payAccount">
+						</select>
+					</td>
+				</tr>
+
+			</table>
+			<div class="col-md-10">
+				<div class="alert alert-warning alert-dismissable" ng-show="errorShow">
+					<button type="button" class="close" ng-click="toggleError()">×</button>
+					<h4 style="margin-bottom: 0;" class="{{tr}}" ><i class="icon fa fa-warning"></i> <d>Alert</d> <span ng-repeat="m in errorMessage">{{dic(m.field)}} - {{dic(m.content)}} {{m.extra}}</span></h4>
+
+				</div>
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-primary pull-right"  ng-click="saveInvoice()"  ng-disabled="lockForm"><d>Save</d></button>
+			</div>
+		</div>
+
+	</div><!-- /.box-body -->
+</div><!-- /.box -->
+</section>
+
+

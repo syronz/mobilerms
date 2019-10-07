@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html ng-app="diakoApp">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ERP14</title>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+	<link href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATcZYyG6vhIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEm+TMB+59ZgAAAAAAAAAAAAAAAAIPjwZFoarAwAAAAAAAAAAAAAAAAAAAAAAAAAAE3KWUxNwlCUAAAAAAAAAABJtjy8fuPSUAAAAAAAAAAASbY8YH7fykxqe0gwAAAAAAAAAAAAAAAAAAAAAAAAAABeHsjYfufXFF4m1RQAAAAATc5oMHrTwGRuh1QsdsuoGHrTuUx618EYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAF4SvKheKt08QXHokH7n2nB+49cgfufXIH7n1fBBceiUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQXHsoH7n3yh+49GgXibQzF4q4NB+59oMfuvfQEFt5HgAAAAAAAAAACz9RAgtBVgYSaIkHE3GVOBNyl0USbpALH7r2ex+49Wcdr+QBAAAAAAAAAAAdseYeHrbwjR649HsQXnsKHbDobB+486EeruYUHbXuMB638nQfuPWZHrXwVh+59bgXirYyAAAAAAAAAAAAAAAAAAAAABeItSIetfBpG6XZHR6171oPWncgAAAAAAAAAAAAAAAAAAAAABqd0AwfuPW9F4m2MAAAAAAAAAAAAAAAAAAAAAAcpNYRHKjbFgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAantAGH7n2lh+38l0cqdoBAAAAAAAAAAAetO0ZHrXuUheFrxQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAILTwIHrbxWx+28VQfufbIH7fyXBeJtjIXirg1HrbwZh607VsXiLMpAAAAAAAAAAAAAAAAAAAAAAAAAAAILTwEH7bzdh649YwesuwgEF16KB+59YYet/OOHrfzhheHskAXibQwHrfynxqg044PV3EWAAAAAAAAAAAAAAAADEBUGR+y61AAAAAAAAAAAAAAAAATcpYJH7fykRqe0TgAAAAAD1p2ARqh1Q0aoNMRD1dxAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE3OZCR+49aUbodYuAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABNvlAQft/ODG6LWOQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHrDpJxqayyYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP7/AAD+7wAA7/8AAPx/AAD7nwAA/90AANf/AAD3/wAA9/8AAPv/AADsZwAA/v8AAP7/AAD+/wAA//8AAA==" rel="icon" type="image/x-icon" />
+
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+	<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- for dashboard -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"> 
+	<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+	<script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+	<script src="dist/js/lucid.js"></script>
+	<!--<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>-->
+	<script src="js/spin.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/angular.min.js"></script>
+
+
+	<script src="js/angular-route.min.js"></script>
+	<script src="dist/js/app.min.js"></script>
+	<script src="dist/js/demo.js"></script>
+	<script src="js/words.js"></script>
+	<script src="js/script.js"></script>
+	<script src="js/controller/main.js"></script>
+
+	<!-- Chart -->
+	<script src="plugins/chart/Chart.min.js"></script>
+	<script src="plugins/chart/angular-chart.min.js"></script>
+	
+	<script src="js/controller/login.js"></script>
+	<script src="js/controller/user.js"></script>
+	<script src="js/controller/perm.js"></script>
+	<!-- new part -->
+	<script src="js/controller/city.js"></script>
+	<script src="js/controller/branch.js"></script>
+	<script src="js/controller/depp.js"></script>
+	<script src="js/controller/cat.js"></script>
+	<script src="js/controller/brand.js"></script>
+	<script src="js/controller/product.js"></script>
+	<script src="js/controller/user_depp.js"></script>
+	<script src="js/controller/depp_cat.js"></script>
+	<script src="js/controller/account.js"></script>
+	<script src="js/controller/dollar_rate.js"></script>
+	<script src="js/controller/indepp_piece.js"></script>
+	<script src="js/controller/card.js"></script>
+	<script src="js/controller/brandDepp.js"></script>
+	<script src="js/controller/model.js"></script>
+	<script src="js/controller/store.js"></script>
+	<script src="js/controller/accountDepp.js"></script>
+	<script src="js/controller/accountDeppView.js"></script>
+	<script src="js/controller/outdepp_piece.js"></script>
+	<script src="js/controller/outdepp_piece_new.js"></script>
+	<script src="js/controller/mobile_repairman.js"></script>
+	<script src="js/controller/order_mobile_new.js"></script>
+	<script src="js/controller/outdepp_piece_edit.js"></script>
+	<script src="js/controller/order_mobile.js"></script>
+	<script src="js/controller/cashDeppView.js"></script>
+	<script src="js/controller/order_mobile_print.js"></script>
+	<script src="js/controller/indepp_mobile.js"></script>
+	<script src="js/controller/snapshot.js"></script>
+	<script src="js/controller/outdepp_mobile.js"></script>
+	<script src="js/controller/outdepp_mobile_new.js"></script>
+	<script src="js/controller/outdepp_mobile_edit.js"></script>
+	<script src="js/controller/dashboard.js"></script>
+	<script src="js/controller/balance_report.js"></script>
+	<script src="js/controller/log.js"></script>
+	<script src="js/controller/accountView.js"></script>
+	<script src="js/controller/indepp_acc.js"></script>
+	<script src="js/controller/outdepp_acc.js"></script>
+	<script src="js/controller/outdepp_acc_new.js"></script>
+	<script src="js/controller/outdepp_acc_edit.js"></script>
+	<script src="js/controller/range.js"></script>
+	<script src="js/controller/productSellReport.js"></script>
+	<script src="js/controller/debtsReport.js"></script>
+	<script src="js/controller/debtsReportSimple.js"></script>
+
+	<script src="js/directive/testDirective.js"></script><!-- must deleted -->
+	<script src="js/directive/outdeppBodyTwoStep.js"></script>
+	<script src="js/directive/outdeppHeader.js"></script>
+	<script src="js/directive/newCustomer.js"></script>
+	<script src="js/directive/outdeppPay.js"></script>
+	<script src="js/directive/outdeppPrintTwoStep.js"></script>
+	<script src="js/directive/outdeppPrintPay.js"></script>
+	<script src="js/directive/indeppHeader.js"></script>
+	<script src="js/directive/indeppBodyTwoStep.js"></script>
+	<script src="js/directive/indeppPay.js"></script>
+	<script src="js/directive/indeppPrintTwoStep.js"></script>
+	<script src="js/directive/indeppPrintPay.js"></script>
+
+	<script src="js/indexeddb/angular-indexed-db.min.js"></script>
+	<script>
+		$(window).on('load', function() {
+			$(this).impulse();
+		});
+	</script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini" ng-controller="mainCtrl">
+
+
+	<div class="wrapper">
+		<div id="loading" ng-show="loading"></div>
+		<header class="main-header">
+			<a href="" class="logo hidden-xs" >
+				<span class="logo-mini"><b>ERP</b></span>
+				<span class="logo-lg"><b>ERP</b>14</span>
+			</a>
+			<nav class="navbar navbar-static-top" role="navigation">
+				<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+					<span class="sr-only">Toggle navigation</span>
+				</a>
+				<div class="navbar-custom-menu">
+					<ul class="nav navbar-nav">
+						<li class="dropdown tasks-menu hidden-xs">
+							<select class="userAuthDepp" id="userDeppAuth" ng-options="option.depp + ' ' + option.code for option in userDeppAuth track by option.id" ng-model="userDeppAuthSelect" name="userDeppAuth" ng-change="updateSelectedDepp(userDeppAuthSelect)">
+							</select>
+						</li>
+						<!-- <li class="dropdown tasks-menu">
+							<a class="dropdown-toggle toPointer" ng-click="toExcel()" title="Alt+L">
+								<i class="fa fa-download"></i>
+							</a>
+						</li> -->
+						<li class="dropdown tasks-menu">
+							<a  class="dropdown-toggle toPointer" ng-click="doPrint()" title="Alt+P">
+								<i class="fa fa-print"></i>
+							</a>
+						</li>
+						<!-- <li class="dropdown tasks-menu">
+							<a href="#dfs" class="dropdown-toggle">
+								<i class="fa fa-flag-o"></i>
+								<span class="label label-danger">900</span>
+							</a>
+						</li> -->
+						<li class="dropdown user user-menu">
+							<a class="dropdown-toggle toPointer" data-toggle="dropdown">
+								<i class="fa fa-sign-out"></i>
+							</a>
+							<ul class="dropdown-menu">
+								<li class="user-header">
+									<img src="dist/img/logout.png" class="img-circle" alt="User Image">
+									<p>
+										ERP14
+										<small>for any problem call 07505149171</small>
+									</p>
+								</li>
+								<li class="user-footer">
+
+									<div class="pull-right">
+										<a href="#login" class="btn btn-default btn-flat"  ng-click="doLogout()">Sign out</a>
+									</div>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+
+
+		<aside class="main-sidebar">
+			<section class="sidebar">
+				<form class="sidebar-form">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search..." ng-model="searchStr">
+						<span class="input-group-btn">
+							<button type="submit" name="search" id="search-btn" class="btn btn-flat" ng-click="doSearch()"><i class="fa fa-search"></i></button>
+						</span>
+					</div>
+				</form>
+				<ul class="sidebar-menu">
+					<li class="">
+						<div class="form-group visible-xs ">
+							<select class="form-control block" id="userDeppAuth" ng-options="option.depp + ' ' + option.code for option in userDeppAuth track by option.id" ng-model="userDeppAuthSelect" name="userDeppAuth">
+							</select>
+						</div>
+					</li>
+
+					<li class="active">
+						<a href="#dashboard">
+							<i class="fa fa-dashboard"></i> <span><d>Dashboard</d></span> </i>
+						</a>
+					</li>
+
+					<li class=" treeview">
+						<a href="">
+							<i class="fa fa-suitcase"></i> <span><d>Accounting</d></span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li class="active"><a href="#cash/1/25/id/DESC"><i class="fa fa-money"></i> <d>cash</d></a></li>
+							<li class=""><a href="#account/1/25/id/asc"><i class="fa fa-credit-card-alt"></i> <d>account</d></a></li>
+							<li class=""><a href="#accountDepp/1/25/id/ASC"><i class="fa fa-credit-card-alt"></i> <d>accountInDepp</d></a></li>
+							<!-- <li class=""><a href="#dollar_rate/1/25/id/asc"><i class="fa fa-usd"></i> <d>DollarRate</d></a></li> -->
+							<li class=""><a href="#snapshot"><i class="fa fa-newspaper-o"></i><d>Snapshot</d></a></li>
+							<!-- <li class=""><a href="#debtsReport"><i class="fa fa-calendar-minus-o"></i><d>debtsReport</d></a></li> -->
+							<li class=""><a href="#debtsReportSimple"><i class="fa fa-calendar-minus-o"></i><d>debtsReportSimple</d></a></li>
+						</ul>
+					</li>
+
+					<li class=" treeview" ng-show="userDeppAuthSelect.type == 'piece'">
+						<a href="">
+							<i class="fa fa-puzzle-piece"></i> <span><d>Pieces</d></span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li class="active"><a href="#outdepp_piece/1/25/id/DESC"><i class="fa fa-tags"></i> <d>outDepp</d></a></li>
+							<li class="active"><a href="#indepp_piece/1/25/id/DESC"><i class="fa fa-tags"></i> <d>inDepp</d></a></li>
+							<li class=" treeview">
+								<a href="">
+									<i class="fa fa-cog"></i> <span><d>ProductControl</d></span> <i class="fa fa-angle-left pull-right"></i>
+								</a>
+								<ul class="treeview-menu">
+									<li class=""><a href="#brandDepp/1/25/id/asc"><i class="fa fa-cubes"></i><d>brand</d></a></li>
+									<li class=""><a href="#product/1/25/id/asc"><i class="fa fa-copyright"></i><d>product</d></a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+
+					<li class=" treeview" ng-show="userDeppAuthSelect.type == 'mobile'">
+						<a href="">
+							<i class="fa fa-mobile"></i> <span><d>Mobiles</d></span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li class="active"><a href="#outdepp_mobile/1/25/id/DESC"><i class="fa fa-tags"></i> <d>outDepp</d></a></li>
+							<li class="active"><a href="#indepp_mobile/1/25/id/DESC"><i class="fa fa-tags"></i> <d>inDepp</d></a></li>
+							<!-- <li class=" treeview">
+								<a href="">
+									<i class="fa fa-cog"></i> <span><d>ProductControl</d></span> <i class="fa fa-angle-left pull-right"></i>
+								</a>
+								<ul class="treeview-menu">
+									<li class=""><a href="#brandDepp/1/25/id/asc"><i class="fa fa-cubes"></i><d>brand</d></a></li>
+									<li class=""><a href="#product/1/25/id/asc"><i class="fa fa-copyright"></i><d>product</d></a></li>
+								</ul>
+							</li> -->
+						</ul>
+					</li>
+
+					<li class=" treeview" ng-show="userDeppAuthSelect.type == 'accessories'">
+						<a href="">
+							<i class="fa fa-gift"></i> <span><d>Accessories</d></span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li class="active"><a href="#outdepp_acc/1/25/id/DESC"><i class="fa fa-tags"></i> <d>outDepp</d></a></li>
+							<li class="active"><a href="#indepp_acc/1/25/id/DESC"><i class="fa fa-tags"></i> <d>inDepp</d></a></li>
+						</ul>
+					</li>
+
+					<li class=" treeview" ng-show="userDeppAuthSelect.type == 'repair_mobile'">
+						<a href="">
+							<i class="fa fa-wrench"></i> <span><d>repair_mobile</d></span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li class="active"><a href="#mobile_repairman/1/25/id/DESC"><i class="fa fa-user-md"></i> <d>mobileRepairman</d></a></li>
+							<li class="active"><a href="#order_mobile/1/25/id/DESC"><i class="fa fa-tags"></i> <d>repairList</d></a></li>
+						</ul>
+					</li>
+					
+					<li class=" treeview">
+						<a href="">
+							<i class="fa fa-cog"></i> <span><d>ProductControl</d></span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li class="active"><a href="#cat/1/25/id/asc"><i class="fa fa-cube"></i><d>cat</d></a></li>
+							<li class=""><a href="#brand/1/25/id/asc"><i class="fa fa-cubes"></i><d>brand</d></a></li>
+							<!-- <li class=""><a href="#model/1/25/id/asc"><i class="fa fa-cubes"></i><d>model</d></a></li> -->
+							<li class=""><a href="#product/1/25/id/asc"><i class="fa fa-copyright"></i><d>product</d></a></li>
+							<li class=""><a href="#store/jard"><i class="fa fa-archive"></i><d>store</d></a></li>
+
+						</ul>
+					</li>
+
+					<!-- <li class=" treeview">
+						<a href="">
+							<i class="fa fa-table"></i> <span><d>report</d></span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li class=""><a href="#snapshot"><i class="fa fa-newspaper-o"></i><d>Snapshot</d></a></li>
+							
+						</ul>
+					</li> -->
+
+					<li class=" treeview">
+						<a href="">
+							<i class="fa fa-cogs"></i> <span><d>Setting</d></span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li class="active"><a href="#perm/1/25/id/asc"><i class="fa fa-lock"></i><d>permission</d></a></li>
+							<li class=""><a href="#user/1/25/id/asc"><i class="fa fa-user-secret"></i><d>user</d></a></li>
+							<li class=""><a href="#user_depp/1/25/id/asc"><i class="fa fa-users"></i><d>user_depp</d></a></li>
+							<li class=""><a href="#city/1/25/id/asc"><i class="fa fa-fort-awesome"></i><d>city</d></a></li>
+							<li class=""><a href="#branch/1/25/id/asc"><i class="fa fa-building-o"></i><d>branch</d></a></li>
+							<li class=""><a href="#depp/1/25/id/asc"><i class="fa fa-bookmark"></i><d>depp</d></a></li>
+							<li class=""><a href="#depp_cat/1/25/id/asc"><i class="fa fa-bookmark"></i><d>depp_cat</d></a></li>
+							<!-- <li class=""><a href="#range/1/25/id/asc"><i class="fa fa-circle-o-notch"></i><d>Range</d></a></li> -->
+							
+						</ul>
+					</li>
+
+					
+
+					<!-- <li class=" treeview">
+						<a href="">
+							<i class="fa fa-university"></i> <span><d>Bank</d></span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li class="active"><a href="#credit/1/25/id/asc"><i class="fa fa-btc"></i><d>Credit</d></a></li>
+							<li class=""><a href="#card/1/25/id/asc"><i class="fa fa-credit-card"></i><d>Card</d></a></li>
+						</ul>
+					</li> -->
+
+					<li class=" treeview">
+						<a href="">
+							<i class="fa fa-database"></i> <span><d>logAndBackup</d></span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li class="active"><a href="#log/1/25/id/DESC"><i class="fa fa-camera"></i> <d>Log</d></a></li>
+							<li class=""><a href="class/backupClass.php"><i class="fa fa-floppy-o"></i> <d>Backup</d></a></li>
+						</ul>
+					</li>
+
+
+
+					
+
+				</ul>
+			</section>
+			<!-- /.sidebar -->
+		</aside>
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<div ng-view></div>
+		</div><!-- /.content-wrapper -->
+		<footer class="main-footer">
+			<div class="pull-right hidden-xs">
+				<b>Version</b> 2.40
+			</div>
+			<strong>Copyright &copy; 2015-2016 <a href="http://erp14.com">ERP14</a>.</strong> All rights reserved.
+			<iframe name="print_frame" width="0" height="0" frameborder="0" id="print_frame" src="about:blank"></iframe>
+		</footer>
+
+		<!-- Control Sidebar -->
+	</div><!-- ./wrapper -->
+
+	<script>
+		var opts = {lines: 11, length: 43, width: 11, radius: 30, scale: 0.5, corners: 1, color: '#000', opacity: 0.35, rotate: 0, direction: 1, speed: 1.2, trail: 38, fps: 20, zIndex: 2e9, className: 'spinner', top: '50%', left: '50%', shadow: false, hwaccel: false, position: 'absolute'}
+		var target = document.getElementById('loading')
+		var spinner = new Spinner(opts).spin(target);
+	</script>
+
+	
+	
+</body>
+</html>

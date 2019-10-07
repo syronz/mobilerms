@@ -1,0 +1,20 @@
+<table class="table table-striped">
+	<tr>		
+		<td colspan="2" align="right">
+			<d>addToAccount</d>:
+		</td>
+		<td colspan="3" align="right">
+			<select class="form-control" id="payAccount" ng-options="option.name for option in accountPayList track by option.id" ng-model="invoice.pay.id_account" name="payAccount">
+			</select>
+		</td>
+		<td colspan="2" align="right">
+			<d>Payin</d>:
+		</td>
+		<td colspan="1" align="right">
+			<input ng-model="invoice.pay.payDinar" placeholder="IQD" ng-validate="number" class="form-control">
+		</td>
+		<td>
+			<input ng-model="invoice.pay.payDollar" placeholder="$" ng-validate="number" class="form-control">
+		</td>
+	</tr>
+</table>

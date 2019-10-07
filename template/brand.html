@@ -1,0 +1,77 @@
+<section class="content" id="printThis">
+	<div class="box">
+		<div class="box-header">
+			<h3 class="box-title"><d>brandTable</d></h3>
+			<button class="btn btn-primary btn-xs addBtn noPrint" data-toggle="modal"  ng-click="add()" title="Alt+N"><d>addNew</d></button>
+		</div><!-- /.box-header -->
+		<div class="box-body">
+			<table class="table table-bordered table-striped dataTable">
+				<thead>
+					<tr>
+						<th class="{{checkSort('id')}}" id="id" ng-click="sorting('id')"><d>id</d></th>
+						<th class="{{checkSort('id_cat')}}" id="id_cat" ng-click="sorting('id_cat')"><d>cat</d></th>
+						<th class="{{checkSort('name')}}" id="name" ng-click="sorting('name')"><d>name</d></th>
+						<th class="{{checkSort('detail')}}" id="detail" ng-click="sorting('detail')"><d>detail</d></th>
+						<th><d>action</d></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in brandList">
+						<td>{{item.id}}</td>
+						<td>{{item.cat}}</td>
+						<td>{{item.name}}</td>
+						<td>{{item.detail}}</td>
+						<td>
+							<button class="btn btn-warning btn-xs noPrint" data-toggle="modal" data-target="#appModal" ng-click="edit(item)"><d>edit<default/d></button>
+							<button class="btn btn-danger btn-xs noPrint" data-toggle="modal" data-target="#appModal" ng-click="delete(item)"><d>delete</d></button>
+						</td>
+					</tr>
+				</table>
+				<pagination></pagination>
+
+			</div><!-- /.box-body -->
+		</div><!-- /.box -->
+	</section>
+
+
+	<div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-labelledby="DiakoModal">
+		<div class="modal-dialog modal-md bigModal" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="appModalLabel">{{modalTitle}}</h4>
+				</div>
+				<div class="modal-body">
+					<form name="mForm" novalidate>
+						<div class="form-group">
+							<label for="cat" class="control-label"><d>cat</d>:</label>
+							<select class="form-control" id="cat" ng-change="totalDisplayedPlus()" ng-model="modal.id_cat" name="cat" required autofocus>
+								<option ng-repeat="cat in catList | limitTo:totalDisplayed" value="{{cat.id}}">{{cat.name}}</option>
+								
+								<!-- <option><d>Load_More</d></option> -->
+								
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="name" class="control-label"><d>name</d>:</label>
+							<input type="text" class="form-control" id="name" name="name" ng-model="modal.name" required>
+						</div>
+						
+						<div class="form-group">
+							<label for="detail" class="control-label"><d>detail</d>:</label>
+							<input type="text" class="form-control" id="detail" name="detail" ng-model="modal.detail">
+						</div>
+
+					</form>
+					<div>
+						<p ng-repeat="m in errorMessage" class="bg-warning modalError">{{dic(m.field)}} - {{dic(m.content)}} {{m.extra}}</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"><d>close</d></button>
+					<button type="button" class="btn btn-primary" ng-click="saveModal()" ng-hide="modalType == 'delete'" ng-disabled="!mForm.$valid || lockForm"><d>save</d></button>
+					<button type="button" class="btn btn-danger" ng-click="saveModal()" ng-show="modalType == 'delete'"  ng-disabled="lockForm"><d>delete</d></button>
+				</div>
+			</div>
+		</div>
+	</div>

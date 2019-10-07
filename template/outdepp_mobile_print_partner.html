@@ -1,0 +1,202 @@
+<section class="content" id="printThis" ng-init="loadPrint();getPayAccounts()">
+	<style type="text/css">
+		td,.calibri{font-family: 'Calibri';}
+		.xani{font-family: 'Unikurd Xani';font-size:0.5cm;}
+		h3,.chiman,th{font-family: 'Unikurd Chimen';font-weight: normal;}
+		p{margin: 0;}
+		table td{
+			padding: 0.2cm 0.3cm 0.2cm 0.3cm;
+			border: 1px solid #444;
+		}
+
+		table th{
+			border: 1px solid #444;
+			font-size: 1.2em;
+			font-weight: bold;
+		}
+
+		.headerPart{
+			float: left;
+		}
+
+		.bigPart{
+			width: 40%;
+		}
+		.smallPart{
+			width: 20%;
+			text-align: center;
+		}
+
+		.detailBox{
+			border: 1px solid #444;
+			width: 30%;
+			float: left;
+			margin-top: 15px;
+		}
+		.detailBox p{
+			margin-top: -22px;
+			background-color: white;
+			width: 60px;
+			text-align: center;
+			margin-bottom: 15px;
+		}
+
+		.footer{
+			position: absolute;
+			bottom: 1px;
+			width: 100%;
+			margin: 0;
+			margin-left: -10px;
+			border: 1px solid #444;
+			padding: 5px;
+		}
+		.footer p{
+			margin-right: 10px;
+		}
+	</style>
+	<div class="box">
+		<div class="box-body">
+			<div id="invoicePrint" class="invoicePrintStyle">
+				<div class="headerPart bigPart">
+					<p> <span class="calibri">#{{invoicePrint.base.id}}</span></p>
+					<p> <span class="calibri">{{invoicePrint.base.invoice}}</span></p>
+					<p><span class="calibri">{{invoicePrint.base.date | date:'yyyy-MM-dd HH:mm:ss'}}</span></p>
+					
+
+				</div>
+
+				<div class="headerPart smallPart">
+					<img id="company_logo" src="dist/img/logo.png" alt="Hi Company" height="100"  />
+				</div>
+
+				<div class="headerPart bigPart">
+					<div style="width:70%;float:right;direction:{{tr}};">
+						<h3 style=" font-size:1.5em;margin:0 0 0.1cm 0"><d>invoiceSell</d></h3>
+						<p><d>Buyer</d>:
+						{{invoicePrint.base.account}} {{invoicePrint.base.accountSerial}}</p>
+						<p>{{invoicePrint.base.accountMobile}}</p>
+						<p>{{invoicePrint.base.accountPhone}}</p>
+						
+					</div>
+				</div>
+
+				
+
+				
+				
+				<div style="clear:both;"></div>
+				<hr>
+
+				<table class="" align="center" border="0" cellspacing="0" style="width:100%;margin-top:0.3cm; ">
+					<tr style="background-color: #0072FF; color:white;">
+						<th></th>
+						<th><d>Brand</d></th>
+						<th><d>Product</d></th>
+						<th><d>Qty</d></th>
+						<th><d>Cost</d></th>
+						<th><d>Total</d></th>
+					</tr>
+					<tr ng-repeat="item in invoicePrint.items" class="gray{{$index%2}}">
+						<td>{{$index + 1}}</td>
+						<td>{{item.brand}}</td>
+						<td>{{item.product}} {{item.description}}</td>
+						<td>{{item.qty}}</td>
+						<td>{{item.cost | currency}}</td>
+						
+						<td align="right">{{item.cost * item.qty | currency}}</td>
+					</tr>
+					
+					<tr>
+						<td colspan="3"><d>totalQty</d></td>
+						<td><strong>{{invoicePrint.base.totalQTY}}</strong></td>
+					</tr>
+					
+					
+				</table>
+
+				<table border="1" style="float:right; margin-top:15px;"  cellspacing="0">
+					<tr>
+						<td align="right" class="chiman" style="padding-top: 0.2cm;">
+							<d>SubTotal</d>:
+						</td>
+						<td align="right" style="padding-top: 0.2cm;">
+							{{invoicePrint.base.total | currency}}
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="chiman">
+							<d>Discount</d>: 
+						</td>
+						<td align="right">
+							({{invoicePrint.base.discount}}%) = {{(invoicePrint.base.total * invoicePrint.base.discount) / 100 | currency}}
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="chiman">
+							<d>GrandTotal</d>:
+						</td>
+						<td align="right">
+							<b>{{(100 - invoicePrint.base.discount) * invoicePrint.base.total / 100 | currency}}</b>
+						</td>
+					</tr>
+				</table>
+
+				<div style="direction:{{tr}};padding:0.3cm;" class="detailBox" ng-show="invoicePrint.base.detail">
+					<p><d>Detail</d>:</p>
+					{{invoicePrint.base.detail}}
+				</div>
+
+				<div style="clear:both;"></div>
+
+				
+
+				
+
+				<table border="1" style="float:right; margin-top:15px;"  cellspacing="0">
+					<tr>
+						<td align="right" class="chiman" style="padding-top: 0.2cm;">
+							<d>preBalance</d>:
+						</td>
+						<td align="right" style="padding-top: 0.2cm;">
+							{{invoicePrint.base.pre_balance | currency}}
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="chiman">
+							<d>newBalance</d>: 
+						</td>
+						<td align="right">
+							{{(100 - invoicePrint.base.discount) * invoicePrint.base.total / 100 + invoicePrint.base.pre_balance | currency}}
+						</td>
+					</tr>
+				</table>
+
+
+				<div style="clear:both;"></div>
+				<div style="direction:{{tr}}; margin-top:10px;">
+					<p>
+						<d>dateForPayThisAmount</d>: {{invoicePrint.base.date15 | date:'yyyy/MM/dd'}}
+					</p>
+				</div>
+				
+				<br><br>
+				<div class="col-md-2 col-md-offset-10 noPrint">
+					<button class="btn btn-primary pull-right"  ng-click="doPrint()"><d>Print</d></button>
+				</div>
+
+				<br><br><br><br>
+
+
+				<div class="footer" style="direction:{{tr}}">
+					<p style="float:right">{{invoicePrint.base.depp}} - {{invoicePrint.base.deppCode}} {{invoicePrint.base.phone}} {{invoicePrint.base.address}}, <d>Accounter</d>: {{invoicePrint.base.user}} </p>
+					<p style="float:left">{{today | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+					<p></p>
+				</div>
+				
+			</div>
+
+		</div><!-- /.box-body -->
+	</div><!-- /.box -->
+</section>
+
+

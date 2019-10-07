@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'Conv_xendanreg';
+  src: url('../fonts/xendanreg.eot');
+  src: local('☺'), url('../fonts/xendanreg.ttf') format('truetype'), url('../fonts/xendanreg.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+body{
+  font-family: 'Conv_xendanreg';
+  font-weight: normal;
+}
+
+h1,.box-title,h4,h3{
+  font-family: 'Conv_xendanreg';
+}
+
+h3{
+  text-align: center;
+}
+
+.modalError{
+  text-align: center;
+}
+
+.ltr{
+  direction: ltr;
+}
+
+.rtl{
+  direction: rtl;
+}

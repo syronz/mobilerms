@@ -1,0 +1,65 @@
+<section class="content" id="printThis">
+	<div class="box">
+		<div class="box-header">
+			<div class="col-md-8">
+				<h3 class="box-title"><d>balanceTable</d> {{date | date:"yyyy/MM/dd"}}</h3>
+			</div>
+			<div class="col-md-2">
+				<!-- <button class="btn btn-warning btn-xs addBtn noPrint"  ><d>toggleDepp</d></button> -->
+			</div>
+			
+
+			
+		</div><!-- /.box-header -->
+		<div class="box-body">
+			<table class="table table-bordered">
+				<thead>
+					<tr class="info">
+						<th>#</th>
+						
+						<th><d>Creditor</d></th>
+						<th><d>Type</d></th>
+						<th><d>Balance</d></th>
+						<th><d>Debtor</d></th>
+						<th><d>Type</d></th>
+						<th><d>Balance</d></th>
+						<th class="hide"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="row in balance_reportData">
+						<td>{{$index + 1}}</td>
+						
+						<td class="warning">{{row.creditorName}}</td>
+						<td class="warning">{{dic(row.creditorType)}}</td>
+						<td class="warning">{{row.creditorBalance | currency}}</td>
+						<td class="success">{{row.debtorName}}</td>
+						<td class="success">{{dic(row.debtorType)}}</td>
+						<td class="success">{{row.debtorBalance | currency}}</td>
+						<td class="hide"></td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr class="active">
+						<td colspan="3"><d>Total</d></td>
+						<td>{{balance_reportData.total.creditor | currency}}</td>
+						<td colspan="2"><d>Total</d></td>
+						<td>{{balance_reportData.total.debtor | currency}}</td>
+						<td class="hide"></td>
+					</tr>
+					<tr class="active">
+						<td colspan="7"><h3 style="text-align:center;">{{balance_reportData.total.debtor + balance_reportData.total.creditor | currency}}</h3></td>
+						<td class="hide"></td>
+					</tr>
+				</tfoot>
+			</table>
+
+
+
+		</div><!-- /.box-body -->
+	</div><!-- /.box -->
+</section>
+
+
+
+

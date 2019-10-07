@@ -1,0 +1,131 @@
+<section class="content" id="printThis">
+	<div class="box">
+		<div class="box-header">
+			<h3 class="box-title"><d>permTable</d></h3>
+			<button class="btn btn-primary btn-xs addBtn noPrint" data-toggle="modal" data-target="#appModal"  ng-click="add()"><d>addNew</d></button>
+		</div><!-- /.box-header -->
+
+		<div class="box-body">
+			<table class="table table-bordered table-striped dataTable">
+				<thead>
+				
+					<tr>
+						<th class="{{checkSort('id')}}" id="id" ng-click="sorting('id')"><d>id</d></th>
+						<th class="{{checkSort('name')}}" id="name" ng-click="sorting('name')"><d>name</d></th>
+						<th class="{{checkSort('perm')}}" id="perm" ng-click="sorting('perm')"><d>perm</d></th>
+						<th class="{{checkSort('user')}}" id="user" ng-click="sorting('user')"><d>user</d></th>
+						<th class="{{checkSort('user_depp')}}" id="user_depp" ng-click="sorting('user_depp')"><d>user_depp</d></th>
+						<th class="{{checkSort('city')}}" id="city" ng-click="sorting('city')"><d>city</d></th>
+						<th class="{{checkSort('branch')}}" id="branch" ng-click="sorting('branch')"><d>branch</d></th>
+						<th class="{{checkSort('depp')}}" id="depp" ng-click="sorting('depp')"><d>depp</d></th>
+						<th class="{{checkSort('fund')}}" id="fund" ng-click="sorting('fund')"><d>fund</d></th>
+						<th class="{{checkSort('dollar_rate')}}" id="dollar_rate" ng-click="sorting('dollar_rate')"><d>dollar_rate</d></th>
+						<th class="{{checkSort('brand')}}" id="brand" ng-click="sorting('brand')"><d>brand</d></th>
+						<th class="{{checkSort('model')}}" id="model" ng-click="sorting('model')"><d>model</d></th>
+						<th class="{{checkSort('piece')}}" id="piece" ng-click="sorting('piece')"><d>piece</d></th>
+						<th class="{{checkSort('customer')}}" id="customer" ng-click="sorting('customer')"><d>customer</d></th>
+						<th class="{{checkSort('store_model')}}" id="store_model" ng-click="sorting('store_model')"><d>store_model</d></th>
+						<th class="{{checkSort('store_piece')}}" id="store_piece" ng-click="sorting('store_piece')"><d>store_piece</d></th>
+						<th class="{{checkSort('in_repair')}}" id="in_repair" ng-click="sorting('in_repair')"><d>in_repair</d></th>
+						<th class="{{checkSort('in_model')}}" id="in_model" ng-click="sorting('in_model')"><d>in_model</d></th>
+						<th class="{{checkSort('in_piece')}}" id="in_piece" ng-click="sorting('in_piece')"><d>in_piece</d></th>
+						<th  id="detail" ><d>detail</d></th>
+						<th><d>action</d></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in permList">
+						<td>{{item.id}}</td>
+						<td>{{item.name}}</td>
+						<td>{{item.perm}}</td>
+						<td>{{item.user}}</td>
+						<td>{{item.user_depp}}</td>
+						<td>{{item.city}}</td>
+						<td>{{item.branch}}</td>
+						<td>{{item.depp}}</td>
+						<td>{{item.fund}}</td>
+						<td>{{item.dollar_rate}}</td>
+						<td>{{item.brand}}</td>
+						<td>{{item.model}}</td>
+						<td>{{item.piece}}</td>
+						<td>{{item.customer}}</td>
+						<td>{{item.store_model}}</td>
+						<td>{{item.store_piece}}</td>
+						<td>{{item.in_repair}}</td>
+						<td>{{item.in_model}}</td>
+						<td>{{item.in_piece}}</td>
+						<td>
+							<button class="btn btn-warning btn-xs noPrint" data-toggle="modal" data-target="#appModal" ng-click="edit(item)"><d>edit<default/d></button>
+							<button class="btn btn-danger btn-xs noPrint" data-toggle="modal" data-target="#appModal" ng-click="delete(item)"><d>delete</d></button>
+						</td>
+					</tr>
+				</table>
+				<pagination></pagination>
+
+			</div><!-- /.box-body -->
+		</div><!-- /.box -->
+	</section>
+
+
+	<div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-labelledby="DiakoModal">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="appModalLabel">{{modalTitle}}</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="name" class="control-label"><d>name</d>:</label>
+							<input type="text" class="form-control" id="name" ng-model="modal.name">
+						</div>
+						<div class="form-group">
+							<label for="college" class="control-label"><d>college</d>:</label>
+							<input type="text" class="form-control" id="college" ng-model="modal.college">
+						</div>
+						<div class="form-group">
+							<label for="department" class="control-label"><d>department</d>:</label>
+							<input type="text" class="form-control" id="department" ng-model="modal.department">
+						</div>
+						<div class="form-group">
+							<label for="student" class="control-label"><d>student</d>:</label>
+							<input type="text" class="form-control" id="student" ng-model="modal.student">
+						</div>
+						<div class="form-group">
+							<label for="highschool" class="control-label"><d>highschool</d>:</label>
+							<input type="text" class="form-control" id="highschool" ng-model="modal.highschool">
+						</div>
+						<div class="form-group">
+							<label for="new_old" class="control-label"><d>new_old</d>:</label>
+							<input type="text" class="form-control" id="new_old" ng-model="modal.new_old">
+						</div>
+						<div class="form-group">
+							<label for="backup" class="control-label"><d>backup</d>:</label>
+							<input type="text" class="form-control" id="backup" ng-model="modal.backup">
+						</div>
+						<div class="form-group">
+							<label for="perm" class="control-label"><d>perm</d>:</label>
+							<input type="text" class="form-control" id="perm" ng-model="modal.perm">
+						</div>
+						<div class="form-group">
+							<label for="user" class="control-label"><d>user</d>:</label>
+							<input type="text" class="form-control" id="user" ng-model="modal.user">
+						</div>
+						<div class="form-group">
+							<label for="detail" class="control-label"><d>detail</d>:</label>
+							<input type="text" class="form-control" id="detail" ng-model="modal.detail">
+						</div>
+					</form>
+					<div>
+						<p ng-repeat="m in errorMessage" class="bg-warning modalError">{{dic(m.field)}} - {{dic(m.content)}} {{m.extra}}</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"><d>close</d></button>
+					<button type="button" class="btn btn-primary" ng-click="saveModal()" ng-hide="modalType == 'delete'" ng-disabled="lockForm"><d>save</d></button>
+					<button type="button" class="btn btn-danger" ng-click="saveModal()" ng-show="modalType == 'delete'"  ng-disabled="lockForm"><d>delete</d></button>
+				</div>
+			</div>
+		</div>
+	</div>

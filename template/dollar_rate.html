@@ -1,0 +1,68 @@
+<section class="content" id="printThis">
+	<div class="box">
+		<div class="box-header">
+			<h3 class="box-title"><d>dollar_rateTable</d></h3>
+			<button class="btn btn-primary btn-xs addBtn noPrint" data-toggle="modal"  ng-click="add()" title="Alt+N"><d>addNew</d></button>
+		</div><!-- /.box-header -->
+		<div class="box-body">
+			<table class="table table-bordered table-striped dataTable">
+				<thead>
+					<tr>
+						<th class="{{checkSort('id')}}" id="id" ng-click="sorting('id')"><d>id</d></th>
+						<th class="{{checkSort('id_city')}}" id="id_city" ng-click="sorting('id_city')"><d>city</d></th>
+						<th class="{{checkSort('rate')}}" id="rate" ng-click="sorting('rate')"><d>rate</d></th>
+						<th class="{{checkSort('date')}}" id="date" ng-click="sorting('date')"><d>date</d></th>
+						<th><d>action</d></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in dollar_rateList">
+						<td>{{item.id}}</td>
+						<td>{{item.city}}</td>
+						<td>{{item.rate}}</td>
+						<td>{{item.date}}</td>
+						<td>
+							<button class="btn btn-warning btn-xs noPrint" data-toggle="modal" data-target="#appModal" ng-click="edit(item)"><d>edit<default/d></button>
+							<button class="btn btn-danger btn-xs noPrint" data-toggle="modal" data-target="#appModal" ng-click="delete(item)"><d>delete</d></button>
+						</td>
+					</tr>
+				</table>
+				<pagination></pagination>
+
+			</div><!-- /.box-body -->
+		</div><!-- /.box -->
+	</section>
+
+
+	<div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-labelledby="DiakoModal">
+		<div class="modal-dialog modal-md bigModal" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="appModalLabel">{{modalTitle}}</h4>
+				</div>
+				<div class="modal-body">
+					<form name="mForm" novalidate>
+						<div class="form-group">
+							<label for="city" class="control-label"><d>city</d>:</label>
+							<select class="form-control" id="city" ng-model="modal.id_city" name="city" required autofocus>
+								<option ng-repeat="city in cityList" value="{{city.id}}">{{city.name}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="rate" class="control-label" ng-class="tr"><d>rate</d>: <span class="gray">(1$ = )</span></label>
+							<input type="number" class="form-control" id="rate" name="rate" ng-model="modal.rate" required>
+						</div>
+					</form>
+					<div>
+						<p ng-repeat="m in errorMessage" class="bg-warning modalError">{{dic(m.field)}} - {{dic(m.content)}} {{m.extra}}</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"><d>close</d></button>
+					<button type="button" class="btn btn-primary" ng-click="saveModal()" ng-hide="modalType == 'delete'" ng-disabled="!mForm.$valid || lockForm"><d>save</d></button>
+					<button type="button" class="btn btn-danger" ng-click="saveModal()" ng-show="modalType == 'delete'" ng-disabled="lockForm"><d>delete</d></button>
+				</div>
+			</div>
+		</div>
+	</div>

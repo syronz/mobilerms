@@ -1,0 +1,125 @@
+<section class="content-header" style="height:10px;">
+	<h1>
+		<d>Snapshot</d>
+	</h1>
+</section>
+
+<!-- Main content -->
+<section class="content" id="printThis">
+	<div class="row">
+		<div class="col-md-12">
+
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<div class="form-group">
+						<form>
+							<label class="col-md-1 control-label" for="firstDate"><d>FirstDate</d>:</label>
+							<div class="col-md-3">
+								<input type="date" ng-model="firstDate"  class="form-control" id="firstDate" name="firstDate">
+							</div>
+
+							<label class="col-md-1 control-label" for="lastDate"><d>LastDate</d>:</label>
+							<div class="col-md-3">
+								<input type="date" ng-model="lastDate"  class="form-control" id="lastDate" name="lastDate">
+							</div>
+
+							<div class="col-md-2">
+								<label class="control-label" for="range"><d>AllDepartment</d>: </label>
+								<input type="checkbox" name="range" ng-model="range" id="range">
+							</div>
+
+							<div class="col-md-1">
+								<input type="submit" ng-click="newSnapShot()" value="Send" class="btn btn-primary"  ng-disabled="lockForm">
+							</div>
+						</form>
+					</div>
+
+
+				</div>
+				<!-- /.box-header
+				<div class="box-body text-center">
+
+				</div> -->
+				<!-- /.box-body -->
+			</div>
+			<br>
+
+			<ul class="timeline" ng-repeat="snap in snapshotData"  ng-show="snap.resid != null">
+				<li class="time-label">
+					<span class="bg-green">
+						{{snap.date}}
+					</span>
+				</li>
+				<li>
+					<i class="fa fa-newspaper-o bg-blue"></i>
+					<div class="timeline-item">
+						<span class="time"> <d>AllTransaction</d>: {{snap.transactionCount}} <i class="fa fa-retweet"></i></span>
+
+						<h3 class="timeline-header"><a ><d>Balance</d>:</a> {{snap.balance| currency : "$" :2}}</h3>
+
+						<div class="timeline-body">
+							<table class="table table-bordered">
+								<tbody><tr>
+									<th class="warning"><d>Resid</d></th>
+									<th class="warning"><d>Payables</d></th>
+									<th class="warning"><d>PayableExpense</d></th>
+									<th class="info"></th>
+									<th class="success"><d>Cash</d></th>
+									<th class="success"><d>Receivable</d></th>
+									<th class="success"><d>Store</d></th>
+									<th class="success"><d>Equipment</d></th>
+								</tr>
+								<tr>
+									<td>{{snap.resid | currency : "$" :0}}</td>
+									<td>{{snap.payable | currency : "$" :0}}</td>
+									<td>{{snap.reExpense | currency : "$" :0}}</td>
+									<td class="info"></td>
+									<td>{{snap.cash | currency : "$" :0}}</td>
+									<td>{{snap.receivable | currency : "$" :0}}</td>
+									<td>{{snap.store | currency : "$" :0}}</td>
+									<td>{{snap.equipment | currency : "$" :0}}</td>
+								</tr>
+								<tr class="alignCenter">
+									<td colspan="3" >{{snap.balanceNegative| currency : "$" :0}}</td>
+									<td class="info">{{snap.balance| currency : "$" :0}}</td>
+									<td colspan="4">{{snap.balancePosotive| currency : "$" :0}}</td>
+								</tr>
+							</tbody></table>
+						</div>
+					</div>
+				</li>
+				<li>
+					<i class="fa fa-money bg-yellow"></i>
+					<div class="timeline-item">
+						<span class="time">
+						<a ng-hide="range" href="#balance_report/{{snap.date}}/{{userDeppAuthSelect.id}}"><d>viewDetail</d></a>
+						<a ng-show="range" href="#balance_report/{{snap.date}}"><d>viewDetail</d></a>
+						</span>
+						<h3 class="timeline-header no-border"><a><d>DayExpense</d>:</a> {{snap.dailyExpense| currency : "$" :0}}</h3>
+					</div>
+				</li>				
+				<li>
+					<i class="">&nbsp</i>
+				</li>
+			</ul>
+
+
+
+
+			<ul class="timeline">
+
+				<li>
+					<i class="fa fa-clock-o bg-gray"></i>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+
+</section>
+<!-- /.content 
+</div>-->
+<!-- /.content-wrapper -->
+
+
+

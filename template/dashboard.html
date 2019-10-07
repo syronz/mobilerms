@@ -1,0 +1,253 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		Dashboard
+		<small>Control panel</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="active">Dashboard</li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+	<!-- Small boxes (Stat box) -->
+	<div class="row">
+		<div class="col-lg-3 col-xs-6">
+			<!-- small box -->
+			<div class="small-box bg-aqua">
+				<div class="inner">
+					<h3>{{basicInfo.totalSellCount}}</h3>
+
+					<p><d>countSell</d></p>
+				</div>
+				<div class="icon">
+					<i class="ion ion-bag"></i>
+				</div>
+				<!-- <a href="#" class="small-box-footer"><d>moreInfo</d> <i class="fa fa-arrow-circle-right"></i></a> -->
+			</div>
+		</div>
+		<!-- ./col -->
+		<div class="col-lg-3 col-xs-6">
+			<!-- small box -->
+			<div class="small-box bg-green">
+				<div class="inner">
+					<h3>{{basicInfo.totalSellAmount | currency:'':0}}<sup style="font-size: 20px">$</sup></h3>
+
+					<p><d>totalSell</d></p>
+				</div>
+				<div class="icon">
+					<i class="ion ion-stats-bars"></i>
+				</div>
+				<!-- <a href="#" class="small-box-footer"><d>moreInfo</d> <i class="fa fa-arrow-circle-right"></i></a> -->
+			</div>
+		</div>
+		<!-- ./col -->
+		<div class="col-lg-3 col-xs-6">
+			<!-- small box -->
+			<div class="small-box bg-yellow">
+				<div class="inner">
+					<h3>{{basicInfo.totalJard - basicInfo.storeAccount | currency: '' : 0}}</h3>
+
+					<p>{{basicInfo.totalJard | currency: '' : 0}} - {{basicInfo.storeAccount | currency: '' : 0}}</p>
+				</div>
+				<div class="icon">
+					<i class="ion ion-alert"></i>
+				</div>
+				<!-- <a href="#" class="small-box-footer"><d>moreInfo</d> <i class="fa fa-arrow-circle-right"></i></a> -->
+			</div>
+		</div>
+		<!-- ./col -->
+		<div class="col-lg-3 col-xs-6">
+			<!-- small box -->
+			<div class="small-box bg-red">
+				<div class="inner">
+					<h3>{{basicInfo.totalBuyAmount | currency:'':0}}<sup style="font-size: 20px">$</sup></h3>
+
+					<p><d>totalBuy</d></p>
+				</div>
+				<div class="icon">
+					<i class="ion ion-pie-graph"></i>
+				</div>
+				<!-- <a href="#" class="small-box-footer"><d>moreInfo</d> <i class="fa fa-arrow-circle-right"></i></a> -->
+			</div>
+		</div>
+		<!-- ./col -->
+	</div>
+	<!-- /.row -->
+	<!-- Main row -->
+
+	
+
+
+	<!-- Chart Daily -->
+	<div class="box col-lg-12" style="margin-top:0;">
+		<div class="box-header">
+			<i class="ion ion-clipboard"></i>
+
+			<h3 class="box-title"><d>dailySellChart</d></h3>
+
+			<!-- <div class="box-tools pull-right"> -->
+			<div class="form-group col-md-1 pull-right">
+				<button type="button" class="btn  btn-primary btn-xs" ng-click="newDashboardReport()"><d>GetReport</d></button>
+			</div>
+
+			<div class="form-group col-md-2 pull-right">
+				<select class="userDeppReportSelect" id="userDeppReportSelect" ng-model="userDeppReportSelect" name="userDeppReportSelect">
+					<option value="0" selected><d>All</d></option>
+					<option ng-repeat="o in userDeppReport" value="{{o.id}}">{{o.depp}} {{o.code}}</option>
+				</select>
+			</div>
+
+			<div class="form-group col-md-1 pull-right">
+				<select class="monthReport" id="monthReport" ng-model="monthReport" name="monthReport">
+					<option value="01">1</option>
+					<option value="02">2</option>
+					<option value="03">3</option>
+					<option value="04">4</option>
+					<option value="05">5</option>
+					<option value="06">6</option>
+					<option value="07">7</option>
+					<option value="08">8</option>
+					<option value="09">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				</select>
+			</div>
+
+			<div class="form-group col-md-1 pull-right">
+				<select class="yearReport" id="yearReport" ng-model="yearReport" name="yearReport">
+					<option value="2016">2016</option>
+					<option value="2017">2017</option>
+					<option value="2018">2018</option>
+					<option value="2019">2019</option>
+					<option value="2020">2020</option>
+					<option value="2021">2021</option>
+					<option value="2022">2022</option>
+					<option value="2023">2023</option>
+					<option value="2024">2024</option>
+					<option value="2025">2025</option>
+					<option value="2026">2026</option>
+					<option value="2027">2027</option>
+					<option value="2028">2028</option>
+					<option value="2029">2029</option>
+					<option value="2030">2030</option>
+					<option value="2031">2031</option>
+				</select>
+			</div>
+			<!-- </div> -->
+		</div>
+		<!-- /.box-header -->
+		<div class="box-body">
+			<section class="">
+				<canvas id="line" class="chart chart-line" chart-data="dataDailySell" chart-labels="labelsDailySell" chart-series="seriesDailySell" chart-options="optionsDailySell" chart-dataset-override="datasetOverrideDailySell" chart-click="onClick" height="50"></canvas> 
+			</section>
+		</div>
+		<!-- /.box-body -->
+		<div class="box-footer clearfix no-border">
+			
+		</div>
+	</div>
+	
+
+	<div class="row">
+		<section class="col-lg-12 connectedSortable">
+			<!-- balance box -->
+			<div class="box box-success">
+				<div class="box-header">
+					<i class="fa fa-balance-scale"></i>
+					<h3 class="box-title"><d>balanceSheet</d></h3>
+				</div>
+				<div class="box-body balance" id="balance-box">
+					<div class="timeline-body">
+						<table class="table table-bordered">
+							<tbody><tr>
+								<th class="warning"><d>Resid</d></th>
+								<th class="warning"><d>Payables</d></th>
+								<th class="warning"><d>PayableExpense</d></th>
+								<th class="info"></th>
+								<th class="success"><d>Cash</d></th>
+								<th class="success"><d>Receivable</d></th>
+								<th class="success"><d>Store</d></th>
+								<th class="success"><d>Equipment</d></th>
+							</tr>
+							<tr>
+								<td>{{snap.resid | currency : "$" :0}}</td>
+								<td>{{snap.payable | currency : "$" :0}}</td>
+								<td>{{snap.reExpense | currency : "$" :0}}</td>
+								<td class="info"></td>
+								<td>{{snap.cash | currency : "$" :0}}</td>
+								<td>{{snap.receivable | currency : "$" :0}}</td>
+								<td>{{snap.store | currency : "$" :0}}</td>
+								<td>{{snap.equipment | currency : "$" :0}}</td>
+							</tr>
+							<tr class="alignCenter">
+								<td colspan="3" >{{snap.balanceNegative| currency : "$" :0}}</td>
+								<td class="info">{{snap.balance| currency : "$" :0}}</td>
+								<td colspan="4">{{snap.balancePosotive| currency : "$" :0}}</td>
+							</tr>
+						</tbody></table>
+					</div>
+				</div>
+				<!-- /.balance -->
+				<div class="box-footer">
+					<div class="input-group pull-right">
+						<a  href="#snapshot"><d>viewMore</d></a>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /.Left col -->
+
+
+		<section class="col-lg-12">
+			<div class="box box-warning">
+				<div class="box-header">
+					<i class="fa fa-bar-chart"></i>
+
+					<h3 class="box-title"><d>ProductReportInMonth</d></h3>
+				</div>
+				<div class="box-body">
+					<table class="table table-bordered table-striped dataTable">
+						<tr>
+							<th>#</th>
+							<th><d>code</d></th>
+							<th><d>category</d></th>
+							<th><d>brand</d></th>
+							<th><d>model</d></th>
+							<th><d>product</d></th>
+							<th><d>total_qty</d></th>
+							<th><d>total_cost</d></th>
+							<th><d>total_profit</d></th>
+							<th class="hide"></th>
+						</tr>
+						<tr ng-repeat="p in productList">
+							<td>{{$index + 1}}</td>
+							<td>{{p.code}}</td>
+							<td>{{p.category}}</td>
+							<td>{{p.brand}}</td>
+							<td>{{p.model}}</td>
+							<td>{{p.product}}</td>
+							<td>{{p.total_qty}}</td>
+							<td>{{p.total_cost | currency}}</td>
+							<td>{{p.total_profit | currency}}</td>
+							<td class="hide"></td>
+						</tr>
+					</table>
+				</div>
+				<!-- /.balance -->
+				<div class="box-footer">
+					<div class="input-group pull-right">
+						<a  href="#productSellReport"><d>viewMore</d></a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<!-- /.row (main row) -->
+
+	
+
+</section>

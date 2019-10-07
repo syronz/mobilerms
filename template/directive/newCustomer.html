@@ -1,0 +1,53 @@
+<div class="newCustomer" ng-show="invoice.accountType == 'customer'">
+	<div class="col-md-12">
+		<h3><d>NewCustomer</d></h3>
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="mobile" class="control-label"><d>mobile</d>:</label>
+				<input class="form-control" id="mobile" ng-model="customer.mobile" name="mobile" ng-keypress="mobileChange($event,customer.mobile)">
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div ng-show="errorShowMini" style="color: orange;padding-top: 8px;text-align:center;" class="{{tr}}">
+				<i class="icon fa fa-warning"></i> <span ng-repeat="m in errorMessageMini">{{dic(m.content)}} {{m.extra}}</span>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12" style="margin-bottom:15px;">
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="name" class="control-label"><d>name</d>:</label>
+				<input class="form-control" id="name" ng-model="customer.name" name="name" required ng-disabled="invoice.id_account">
+			</div>
+			<div class="form-group">
+				<label for="phone" class="control-label"><d>phone</d>:</label>
+				<input class="form-control" id="phone" ng-model="customer.phone" name="phone" ng-disabled="invoice.id_account">
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="serial" class="control-label"><d>serial</d>:</label>
+				<input class="form-control" id="serial" ng-model="customer.serial" name="serial" ng-disabled="invoice.id_account">
+			</div>
+			<div class="form-group">
+				<label for="email" class="control-label"><d>email</d>:</label>
+				<input class="form-control" type="email" id="email" ng-model="customer.email" name="email" ng-disabled="invoice.id_account">
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="address" class="control-label"><d>address</d>:</label>
+				<input class="form-control" id="address" ng-model="customer.address" name="address" ng-disabled="invoice.id_account">
+			</div>
+			<div class="form-group">
+				<label for="detail" class="control-label"><d>detail</d>:</label>
+				<input class="form-control" id="detail" ng-model="customer.detail" name="detail" ng-disabled="invoice.id_account">
+			</div>
+		</div>
+		<div class="col-md-4 col-md-offset-4" ng-show="!invoice.id_account">
+			<button class="btn btn-primary btn-block" ng-click="saveCustomer()"><d>SaveCustomer</d></button>
+		</div>
+	</div>
+</div>

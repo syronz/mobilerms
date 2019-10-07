@@ -1,0 +1,215 @@
+<section class="content" id="printThis" ng-init="loadPrint();getPayAccounts()">
+	<style type="text/css">
+		td,.calibri{font-family: 'Calibri';}
+		.xani{font-family: 'Unikurd Xani';font-size:0.5cm;}
+		h3,.chiman,th{font-family: 'Unikurd Chimen';font-weight: normal;}
+		p{margin: 0;}
+		table td{
+			padding: 0 0.3cm 0 0.3cm;
+		}
+
+		.gray0{
+			background-color: #EEEEEE;
+		}
+	</style>
+	<div class="box">
+		<div class="box-body">
+			<div id="invoicePrint" class="invoicePrintStyle">
+				<div style="width:70%;float:right;direction:{{tr}};">
+					<h3 style=" font-size:1.5em;margin-top:0"><d>indepp_piece_new</d></h3>
+					<p><span class="chiman"><d>invoice</d></span>: <span class="calibri">{{invoicePrint.base.invoice}} # | ID{{invoicePrint.base.id}}</span></p>
+					<p><span class="chiman"><d>Date</d></span>: <span class="calibri">{{invoicePrint.base.date | date:'HH:mm:ss dd-MM-yyyy'}}</span></p>
+					<p><span class="chiman"><d>status</d>: {{dic(invoicePrint.base.indeppType)}} / {{dic(invoicePrint.base.status)}}</span></p>
+				</div>
+				<img  style="float:left;" id="company_logo" src="dist/img/logo.png" alt="Hi Company" width="120" />
+				
+				<div style="clear:both;"></div>
+				<hr>
+
+				<table style="direction:{{tr}}; width:100%;">
+					<tr>
+						<td style="width:15%;vertical-align: top;font-size:1em;" class="chiman"><d>Buyer</d>:</td>
+						<td style="width:32%;vertical-align: top;text-align:left;">
+							<p>{{invoicePrint.base.depp}} - {{invoicePrint.base.deppCode}}</p>
+							<p>{{invoicePrint.base.phone}}</p>
+							<p>{{invoicePrint.base.address}}</p>
+						</td>
+						<td style="width:6%;"></td>
+						<td style="width:15%;vertical-align: top;font-size:1em;" class="chiman"><d>Seller</d>:</td>
+						<td style="width:32%;vertical-align: top;text-align:left;">
+							<p>{{invoicePrint.base.account}}</p>
+							<p>{{invoicePrint.base.accountMobile}}</p>
+							<p>{{invoicePrint.base.accountPhone}}</p>
+							<p ng-show="invoicePrint.base.accountSerial">{{invoicePrint.base.accountSerial}}@</p>
+						</td>
+					</tr>
+				</table>
+
+
+				<table class="" align="center" border="0" cellspacing="0" style="width:100%;margin-top:0.8cm; ">
+					<tr style="background-color: #0072FF; color:white;">
+						<th></th>
+						<!-- <th><d>Code</d></th> -->
+						<th><d>Brand</d></th>
+						<th><d>Model</d></th>
+						<th><d>Product</d></th>
+						<!-- <th><d>description</d></th> -->
+						<th>$ <d>Cost</d></th>
+						<th><d>Qty</d></th>
+						<th><d>Total</d></th>
+					</tr>
+					<tr ng-repeat="item in invoicePrint.items" class="gray{{$index%2}}">
+						<td>{{$index + 1}}</td>
+						<!-- <td>{{item.code}}</td> -->
+						<td>{{item.brand}}</td>
+						<td>{{item.model}}</td>
+						<td>{{item.product}} #{{item.code}} {{item.description}}</td>
+						<!-- <td>{{item.description}}</td> -->
+						<td>{{item.cost}}</td>
+						<td>{{item.qty}}</td>
+						<td align="right">{{item.cost * item.qty | currency}}</td>
+					</tr>
+					<tr>
+						<td colspan="6" align="right" class="chiman" style="padding-top: 0.2cm;">
+							<d>SubTotal</d>:
+						</td>
+						<td align="right" style="padding-top: 0.2cm;">
+							{{invoicePrint.base.total | currency}}
+						</td>
+					</tr>
+					<!-- <tr>
+						<td colspan="6" align="right" class="chiman">
+							<d>Discount</d>: 
+						</td>
+						<td align="right">
+							({{invoicePrint.base.discount}}%) = {{(invoicePrint.base.total * invoicePrint.base.discount) / 100 | currency}}
+						</td>
+					</tr>
+					<tr>
+						<td colspan="6" align="right" class="chiman">
+							<d>GrandTotal</d>:
+						</td>
+						<td align="right">
+							<u>{{(100 - invoicePrint.base.discount) * invoicePrint.base.total / 100 | currency}}</u>
+						</td>
+					</tr> -->
+
+					<tr>
+						<td colspan="6" align="right" class="chiman">
+							<d>DollarRate</d>: 
+						</td>
+						<td align="right">
+							{{invoicePrint.base.dollar_rate}} 
+						</td>
+					</tr>
+					<tr>
+						<td colspan="6" align="right" class="chiman">
+							<d>TotalInDinar</d>: 
+						</td>
+						<td align="right">
+							<u>{{((100 - invoicePrint.base.discount) / 100 * invoicePrint.base.total) * invoicePrint.base.dollar_rate | currency:'IQD ':0}}</u>
+						</td>
+					</tr>
+				</table>
+
+				<div style="direction:{{tr}};padding:0.3cm;" ng-show="invoicePrint.base.detail">
+					<d>Detail</d>: {{invoicePrint.base.detail}}
+				</div>
+
+
+
+				<h3 style="text-align:center;"><d>Payment_Info_Table</d></h3>
+				<table border="0" cellspacing="0" style="width:100%;margin-bottom: 0.1cm;">
+					<tr style="background-color: #0072FF; color:white;">
+						<th></th>
+						<th><d>ID</d></th>
+						<th><d>Account</d></th>
+						<th><d>Date</d></th>
+						<!-- <th><d>Dollar</d></th>
+						<th><d>Dinar</d></th>
+						<th><d>DollarRate</d></th> -->
+						<th><d>InDollar</d></th>
+						<!-- <th><d>BslanceInDepp</d></th> -->
+						<th><d>Total</d></th>
+					</tr>
+
+					<tr ng-repeat="pay in invoicePrint.pays" class="gray{{$index%2}}">
+						<td>{{$index + 1}}</td>
+						<td>{{pay.id_acc}}</td>
+						<td class="xani">{{pay.name}}</td>
+						<td>{{pay.date}}</td>
+						<!-- <td>{{pay.dollar}}</td>
+						<td>{{pay.dinar}}</td>
+						<td>{{pay.dollar_rate}}</td> -->
+						<td>{{pay.in_dollar}}</td>
+						<!-- <td>{{pay.depp_balance}}</td> -->
+						<td>{{pay.total | currency}}</td>
+					</tr>
+				</table>
+				<div class="col-md-2 col-md-offset-10 noPrint">
+					<button class="btn btn-primary pull-right"  ng-click="doPrint()"><d>Print</d></button>
+				</div>
+
+				<div class="xani" style="margin-top:1cm;">
+					<div style="width:50%;float:right;text-align:center;">
+						<p><d>SellerSign</d></p>
+					</div>
+
+					<div style="width:50%;float:left;text-align:center;">
+						<p><d>AccounterSign</d></p>
+						<p>{{invoicePrint.base.user}}</p>
+					</div>
+				</div>
+
+
+				<div class="col-md-10 col-md-offset-1 noPrint" ng-show="invoicePrint.base.status == 'progress'">
+					<h3><d>Payout</d></h3>
+
+					<div class="col-md-12 {{tr}}">
+						<p><d>totalOfInvoice</d>: {{(100 - invoicePrint.base.discount) * invoicePrint.base.total / 100 | currency}}</p>
+						<p><d>totaPayout</d>: {{invoicePrint.base.totalPays | currency}}</p>
+						<p class="red"><d>Remained</d>: {{(100 - invoicePrint.base.discount) * invoicePrint.base.total / 100 - invoicePrint.base.totalPays | currency}}</p>
+					</div>
+					<form ng-submit="savePayout()" name="payoutForm" novalidate>
+						<div class="col-md-3">
+							<label class="control-label"><d>Dinar</d>:</label>
+							<input ng-model="pay.payDinar" placeholder="IQD" ng-validate="number" type="number" class="form-control">
+						</div>
+
+						<div class="col-md-3">
+							<label class="control-label"><d>Dollar</d>:</label>
+							<input ng-model="pay.payDollar" placeholder="$" ng-validate="number" type="number" class="form-control">
+						</div>
+
+						<div class="col-md-3">
+							<label class="control-label"><d>lessFromAccount</d>:</label>
+							<select class="form-control" id="payAccount" ng-options="option.id as option.name for option in accountPayList track by option.id" ng-model="pay.id_account_other" name="payAccount">
+							</select>
+						</div>
+
+						<div class="col-md-3">
+							<label class="control-label"><d>Detail</d>:</label>
+							<input ng-model="pay.detail" placeholder="Detail" type="text" class="form-control">
+						</div>
+
+						<div class="col-md-4 col-md-offset-4">
+							<label class="control-label">&nbsp;</label>
+							<button class="btn btn-primary pull-right btn-block" ng-disabled="!payoutForm.$valid || lockForm"><d>Send</d></button>
+						</div>
+
+
+						<div class="col-md-12" style="margin-top: 15px;">
+							<div class="alert alert-warning alert-dismissable " ng-show="errorShow">
+								<button type="button" class="close" ng-click="toggleError()">×</button>
+								<h4 style="margin-bottom: 0;"><i class="icon fa fa-warning"></i> <d>Alert</d> <span ng-repeat="m in errorMessage">{{dic(m.field)}} - {{dic(m.content)}} {{m.extra}}</span></h4>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div><!-- /.box-body -->
+	</div><!-- /.box -->
+</section>
+
+

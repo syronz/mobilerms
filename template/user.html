@@ -1,0 +1,122 @@
+<section class="content" id="printThis">
+	<div class="box">
+		<div class="box-header">
+			<h3 class="box-title"><d>userTable</d></h3>
+			<button class="btn btn-primary btn-xs addBtn noPrint" data-toggle="modal"  ng-click="add()" title="Alt+N"><d>addNew</d></button>
+		</div><!-- /.box-header -->
+		<div class="box-body">
+		{{}}
+			<table class="table table-bordered table-striped dataTable">
+				<thead>
+					<tr>
+						<th class="{{checkSort('id')}}" id="id" ng-click="sorting('id')"><d>id</d></th>
+						<th class="{{checkSort('id_perm')}}" id="id_perm" ng-click="sorting('id_perm')"><d>perm</d></th>
+						<th class="{{checkSort('name')}}" id="name" ng-click="sorting('name')"><d>name</d></th>
+						<th class="{{checkSort('username')}}" id="username" ng-click="sorting('username')"><d>username</d></th>
+						<th class="{{checkSort('state')}}" id="state" ng-click="sorting('state')" title="{{dic('state')}}"><d>state</d></th>
+						<th class="{{checkSort('change_password')}}" id="change_password" ng-click="sorting('change_password')" title="{{dic('force_change_password')}}"><d>force</d></th>
+						<th class="{{checkSort('lang')}}" id="lang" ng-click="sorting('lang')"><d>language</d></th>
+						<th class="{{checkSort('mobile')}}" id="mobile" ng-click="sorting('mobile')"><d>mobile</d></th>
+						<th class="{{checkSort('email')}}" id="email" ng-click="sorting('email')"><d>email</d></th>
+						<th class="{{checkSort('detail')}}" id="detail" ng-click="sorting('detail')"><d>detail</d></th>
+						<th><d>action</d></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in userList">
+						<td>{{item.id}}</td>
+						<td>{{item.perm}}</td>
+						<td>{{item.name}}</td>
+						<td>{{item.username}}</td>
+						<td>{{item.state}}</td>
+						<td>{{item.change_password}}</td>
+						<td>{{item.lang}}</td>
+						<td>{{item.mobile}}</td>
+						<td>{{item.email}}</td>
+						<td>{{item.detail}}</td>
+						<td>
+							<button class="btn btn-warning btn-xs noPrint" data-toggle="modal" data-target="#appModal" ng-click="edit(item)"><d>edit<default/d></button>
+							<button class="btn btn-danger btn-xs noPrint" data-toggle="modal" data-target="#appModal" ng-click="delete(item)"><d>delete</d></button>
+						</td>
+					</tr>
+				</table>
+				<pagination></pagination>
+
+			</div><!-- /.box-body -->
+		</div><!-- /.box -->
+	</section>
+
+
+	<div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-labelledby="DiakoModal">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="appModalLabel">{{modalTitle}}</h4>
+				</div>
+				<div class="modal-body">
+					<form name="mForm" novalidate>
+						<div class="form-group">
+							<label for="perm" class="control-label"><d>perm</d>:</label>
+							<select class="form-control" id="perm" ng-change="totalDisplayedPlus()" ng-model="modal.id_perm" name="perm" required autofocus>
+								<option ng-repeat="perm in permList" value="{{perm.id}}">{{perm.name}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="name" class="control-label"><d>name</d>:</label>
+							<input type="text" class="form-control" id="name" name="name" ng-model="modal.name" required>
+						</div>
+						<div class="form-group">
+							<label for="username" class="control-label"><d>username</d>:</label>
+							<input type="text" class="form-control" id="username" name="username" ng-model="modal.username" required>
+						</div>
+						<div class="form-group">
+							<label for="password" class="control-label"><d>password</d>: <span ng-show="modalType == 'edit'" style="font-size:smaller;"><d>If_you_would_not_change_remain_it_empty</d></span></label>
+							<input type="text" class="form-control" id="password" name="password" ng-model="modal.password">
+						</div>
+						<div class="form-group">
+							<label for="state" class="control-label"><d>state</d>:</label>
+							<select class="form-control" id="state" ng-model="modal.state" name="state">
+								<option value="active"><d>Active</d></option>
+								<option value="deactive"><d>Deactive</d></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="change_password" class="control-label"><d>force_change_password</d>:</label>
+							<select class="form-control" id="change_password" ng-model="modal.change_password" name="change_password">
+								<option value="0"><d>No</d></option>
+								<option value="1"><d>Yes</d></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="lang" class="control-label"><d>language</d>:</label>
+							<select class="form-control" id="lang" ng-model="modal.lang" name="lang">
+								<option value="ku"><d>ku</d></option>
+								<option value="en"><d>en</d></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="mobile" class="control-label"><d>mobile</d>:</label>
+							<input type="text" class="form-control" id="mobile" name="mobile" ng-model="modal.mobile">
+						</div>
+						<div class="form-group">
+							<label for="email" class="control-label"><d>email</d>:</label>
+							<input type="email" class="form-control" id="email" name="email" ng-model="modal.email">
+						</div>
+						<div class="form-group">
+							<label for="detail" class="control-label"><d>detail</d>:</label>
+							<input type="text" class="form-control" id="detail" name="detail" ng-model="modal.detail">
+						</div>
+					</form>
+					<div>
+						<p ng-repeat="m in errorMessage" class="bg-warning modalError">{{dic(m.field)}} - {{dic(m.content)}} {{m.extra}}</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"><d>close</d></button>
+					<button type="button" class="btn btn-primary" ng-click="saveModal()" ng-hide="modalType == 'delete'" ng-disabled="!mForm.$valid || lockForm"><d>save</d></button>
+					<button type="button" class="btn btn-danger" ng-click="saveModal()" ng-show="modalType == 'delete'"  ng-disabled="lockForm"><d>delete</d></button>
+				</div>
+			</div>
+		</div>
+	</div>

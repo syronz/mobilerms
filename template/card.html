@@ -1,0 +1,82 @@
+<section class="content" id="printThis">
+	<div class="box">
+		<div class="box-header">
+			<h3 class="box-title"><d>Card</d></h3>
+		</div><!-- /.box-header -->
+		<div class="box-body cardPage">
+			<table class="table table-bordered table-striped dataTable">
+				<thead>
+					<tr>
+						<th id="date_start"><d>date_start</d></th>
+						<!-- <th id="dollar"><d>dollar</d></th> -->
+						<th id="dinar"><d>dinar</d></th>
+						<th><d>action</d></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in cardList">
+						<td>{{item.date}}</td>
+						<!-- <td>{{item.dollar}}</td> -->
+						<td>{{item.dinar}}</td>
+						<td>
+							<button class="btn btn-primary btn-xs noPrint" data-toggle="modal" ng-click="addCredit(item)"><d>Transaction</d></button>
+						</td>
+					</tr>
+				</table>
+
+			<div class="col-md-4 col-md-offset-4" ng-hide="cardList">
+				<h3><d>Add_Card</d></h3>
+				<form ng-submit="sendCard()" ng-show="!success">
+					<div class="form-group">
+						<label for="card_number" class="control-label"><d>Card_Number</d>:</label>
+						<input type="text" class="form-control" id="card_number" ng-model="account.card_number" required>
+					</div>
+					<div class="form-group">
+						<label for="password" class="control-label"><d>password</d>:</label>
+						<input type="password" class="form-control" id="password" ng-model="account.password" required>
+					</div>
+					<button class="btn btn-primary btn-block" data-toggle="modal"><d>Send</d></button>
+				</form>
+
+				<p ng-repeat="m in errorMessage" class="bg-warning modalError text-red">{{dic(m.field)}} - {{dic(m.content)}} </p>
+
+
+
+				<div class="alert alert-success alert-dismissable" ng-show="success">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					<h4>	<i class="icon fa fa-check"></i> <d>Success</d>!</h4>
+					<p class=" {{tr}}">
+						<d>The_operation_to_add_card_successfully_done</d>
+					</p>
+				</div>
+			</div>
+
+			<div class="col-md-4 col-md-offset-4" ng-show="cardList">
+				<h3><d>Add_Credit</d></h3>
+				<form ng-submit="addCredit()" ng-show="!success">
+					<div class="form-group">
+						<label for="credit" class="control-label"><d>Credit</d> (IQD):</label>
+						<input type="number" class="form-control" id="credit" ng-model="account.credit">
+					</div>
+					<button class="btn btn-primary btn-block" data-toggle="modal"><d>Send</d></button>
+				</form>
+
+				<p ng-repeat="m in errorMessage" class="bg-warning modalError text-red">{{dic(m.field)}} - {{dic(m.content)}} </p>
+
+				<div class="alert alert-success alert-dismissable" ng-show="success">
+					<button type="button" class="close"  ng-click="toggle(success)">×</button>
+					<h4>	<i class="icon fa fa-check"></i> <d>Success</d>!</h4>
+					<p class=" {{tr}}">
+						<span>{{successMessage}}</span> <d>The_operation_to_add_transaction_successfully_done</d>
+					</p>
+				</div>
+			</div>
+
+			
+
+
+		</div><!-- /.box-body -->
+	</div><!-- /.box -->
+</section>
+
+

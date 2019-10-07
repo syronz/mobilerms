@@ -1,0 +1,29 @@
+<table class="table table-striped">
+	<tr>		
+		<td colspan="2" align="right">
+			<d>lessFromAccount</d>:
+		</td>
+		<td colspan="3" align="right">
+			<select class="form-control" id="payAccount" ng-options="option.name for option in accountPayList track by option.id" ng-model="invoice.pay.id_account" name="payAccount">
+			</select>
+		</td>
+		<td colspan="2" align="right">
+			<d>Pay</d>:
+		</td>
+		<td colspan="1" align="right">
+			<input ng-model="invoice.pay.payDinar" placeholder="IQD" ng-validate="number" class="form-control">
+		</td>
+		<td>
+			<input ng-model="invoice.pay.payDollar" placeholder="$" ng-validate="number" class="form-control">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><d>tollFromAccount</d></td>
+		<td colspan="3">
+			<select class="form-control" id="expenseAccount" ng-options="option.name for option in accountTollList track by option.id" ng-model="invoice.pay.id_toll" name="expenseAccount">
+			</select>
+
+		</td>
+		<td colspan="5"></td>
+	</tr>
+</table>

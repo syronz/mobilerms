@@ -1,0 +1,117 @@
+<section class="content-header" style="height:10px;">
+	<h1>
+		<d>productSellReport</d>
+	</h1>
+</section>
+
+<!-- Main content -->
+<section class="content" id="printThis">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box box-solid">
+				<div class="box-header with-border">
+				<div class="form-group noPrint row">
+							<div class="col-md-2">
+								<label class="control-label" for="firstDate"><d>FirstDate</d>:</label>
+								<div>
+									<input type="date" ng-model="firstDate"  class="form-control" id="firstDate" name="firstDate">
+								</div>
+							</div>
+							<div class="col-md-2">
+								<label class="control-label" for="lastDate"><d>LastDate</d>:</label>
+								<div>
+									<input type="date" ng-model="lastDate"  class="form-control" id="lastDate" name="lastDate">
+								</div>
+							</div>
+							<div class="col-md-2">
+								<label class="control-label" for="cat"><d>cat</d>:</label>
+								<div>
+									<select ng-model="id_cat"  class="form-control" id="cat" name="cat" ng-change="getBrands()">
+										<option selected value="all"><d>all</d></option>
+										<option ng-repeat="cat in catList" value="{{cat.id}}">{{cat.name}}</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-2">
+								<label class="control-label" for="brand"><d>brand</d>:</label>
+								<div>
+									<select ng-model="id_brand"  class="form-control" id="brand" name="brand" ng-change="getProducts()">
+										<option selected value="all"><d>all</d></option>
+										<option ng-repeat="brand in brandList" value="{{brand.id}}">{{brand.name}}</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-2">
+								<label class="control-label" for="product"><d>product</d>:</label>
+								<div>
+									<select ng-model="id_product"  class="form-control" id="product" name="product">
+										<option selected value="all"><d>all</d></option>
+										<option ng-repeat="product in productList" value="{{product.id}}">{{product.name}}</option>
+									</select>
+								</div>
+							</div>
+
+
+
+
+							<div class="col-md-2">
+								<label class="control-label" for="product">&nbsp</label>
+								<button  ng-click="newProductSellReport()" class="btn btn-primary col-md-12"><d>Send</d></button>
+							</div>
+					</div>
+
+
+				</div>
+
+				<div class="col-md-12 box-body bgWhite">
+				<h3><d>productSellReport</d>: <small>{{firstDate | date :'yyyy/MM/dd'}}</small> <d>to</d> <small>{{lastDate | date :'yyyy/MM/dd'}}</small></h3>
+					
+					<table class="table table-bordered table-striped dataTable">
+						<tr>
+							<th>#</th>
+							<th><d>code</d></th>
+							<th class="{{checkSort('category')}}" id="category" ng-click="sorting('category')"><d>category</d></th>
+							<th class="{{checkSort('brand')}}" id="brand" ng-click="sorting('brand')"><d>brand</d></th>
+							<!-- <th class="{{checkSort('model')}}" id="model" ng-click="sorting('model')"><d>model</d></th> -->
+							<th class="{{checkSort('product')}}" id="product" ng-click="sorting('product')"><d>product</d></th>
+							<th class="{{checkSort('total_qty')}}" id="total_qty" ng-click="sorting('total_qty')"><d>total_qty</d></th>
+							<th class="{{checkSort('total_cost')}}" id="total_cost" ng-click="sorting('total_cost')"><d>total_cost</d></th>
+							<th class="{{checkSort('total_profit')}}" id="total_profit" ng-click="sorting('total_profit')"><d>total_profit</d></th>
+							<th class="hide"></th>
+						</tr>
+						<tr ng-repeat="p in productSellReportData">
+							<td>{{$index + 1}}</td>
+							<td>{{p.code}}</td>
+							<td>{{p.category}}</td>
+							<td>{{p.brand}}</td>
+							<!-- <td>{{p.model}}</td> -->
+							<td>{{p.product}}</td>
+							<td>{{p.total_qty}}</td>
+							<td>{{p.total_cost | currency}}</td>
+							<td>{{p.total_profit | currency}}</td>
+							<td class="hide"></td>
+						</tr>
+					</table>
+				</div>
+
+			</div>
+
+			
+
+
+
+
+			
+		</div>
+
+	</div>
+
+</section>
+<!-- /.content 
+</div>-->
+<!-- /.content-wrapper -->
+
+
+

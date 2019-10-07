@@ -1,0 +1,59 @@
+<section class="content" id="printThis">
+	<div class="box">
+		<div class="box-header">
+			<h3 class="box-title"><d>logTable</d></h3>
+			<button class="btn btn-primary btn-xs addBtn noPrint" data-toggle="modal"  ng-click="!filterPanel"><d>Filter</d></button>
+		</div><!-- /.box-header -->
+		<div class="box-body">
+			<table class="table table-bordered table-striped dataTable">
+				<thead>
+					<tr>
+						<th class="{{checkSort('id')}}" id="id" ng-click="sorting('id')"><d>id</d></th>
+						<th class="{{checkSort('id_user')}}" id="id_user" ng-click="sorting('id_user')"><d>user</d></th>
+						<th class="{{checkSort('date')}}" id="date" ng-click="sorting('date')"><d>date</d></th>
+						<th class="{{checkSort('part')}}" id="part" ng-click="sorting('part')"><d>part</d></th>
+						<th class="{{checkSort('type')}}" id="type" ng-click="sorting('type')"><d>type</d></th>
+						<th class="{{checkSort('detail')}}" id="detail" ng-click="sorting('detail')"><d>detail</d></th>
+						<th class="{{checkSort('IP')}}" id="IP" ng-click="sorting('IP')"><d>IP</d></th>
+						<th class="{{checkSort('idTable')}}" id="idTable" ng-click="sorting('idTable')"><d>idTable</d></th>
+						<th><d>action</d></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat-start="item in logList">
+						<td>{{item.id}}</td>
+						<td>{{arrUser[item.id_user]}}</td>
+						<td>{{item.date}}</td>
+						<td>{{dic(item.table)}}</td>
+						<td>{{item.action}}</td>
+						<td>{{item.detail}}</td>	
+						<td>{{item.ip}}</td>
+						<td>{{item.id_table}}</td>
+						<td>
+							<button ng-hide="item.action == 'view'" class="btn btn-info btn-xs noPrint" ng-click="showDetail(item)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>
+						</td>
+					</tr>
+					<tr ng-repeat-end ng-show="item.showExtra">
+						<td colspan="9">
+							<table class="table table-bordered table-striped dataTable table-responsive">
+								<tr>
+									<th><d>Field</d></th>
+									<th><d>Before</d></th>
+									<th><d></d></th>
+									<th><d>After</d></th>
+								</tr>
+								<tr ng-repeat="extra in item.extra">
+									<td>{{extra.name}}</td>
+									<td>{{extra.old}}</td>
+									<td>-></td>
+									<td>{{extra.new}}</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+				<pagination></pagination>
+
+			</div><!-- /.box-body -->
+		</div><!-- /.box -->
+	</section>

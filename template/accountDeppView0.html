@@ -1,0 +1,292 @@
+<section class="content" id="printThis">
+	<div class="box">
+		<div class="box-header">
+			<div class="col-md-6">
+				<h3 class="box-title"><d>accountTable</d> {{accountInfo.name}} #{{accountInfo.serial}}</h3>
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-info btn-xs addBtn noPrint"   ng-click="toggleShowFilter()"><d>Filter</d></button>
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-warning btn-xs addBtn noPrint" data-toggle="modal" data-target="#transferModal"  ng-click="transferTo()">-</button>
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-success btn-xs addBtn noPrint" data-toggle="modal" data-target="#transferModal"  ng-click="transferFrom()">+</button>
+			</div>
+
+			<div class="col-md-12 noPrint" ng-show="showFilter">
+				<hr/>
+				<label class="col-md-1 control-label" for="firstDate"><d>FirstDate</d>:</label>
+				<div class="col-md-3">
+					<input type="date" ng-model="firstDate"  class="form-control" id="firstDate" name="firstDate">
+				</div>
+
+				<label class="col-md-1 control-label" for="lastDate"><d>LastDate</d>:</label>
+				<div class="col-md-3">
+					<input type="date" ng-model="lastDate"  class="form-control" id="lastDate" name="lastDate">
+				</div>
+
+				<div class="col-md-2"></div>
+
+				<div class="col-md-1">
+					<input type="submit" ng-click="showByDateFilter()" value="Send" class="btn btn-primary"  ng-disabled="lockForm">
+				</div>
+			</div>
+			
+		</div><!-- /.box-header -->
+		<div class="box-body">
+			<table class="table table-bordered table-striped dataTable">
+				<thead>
+					<tr>
+						<th class="{{checkSort('id')}}" id="id" ng-click="sorting('id')"><d>id</d></th>
+						<th class="{{checkSort('id_user')}}" id="user" ng-click="sorting('id_user')"><d>User</d></th>
+						<th class="{{checkSort('id_account_other')}}" id="account" ng-click="sorting('id_account_other')"><d>account</d></th>
+						<th class="{{checkSort('type')}}" id="type" ng-click="sorting('type')"><d>type</d></th>
+						<th class="{{checkSort('in_out')}}" id="in_out" ng-click="sorting('in_out')"><d>in_out</d></th>
+						<th class="{{checkSort('dollar')}}" id="dollar" ng-click="sorting('dollar')"><d>dollar</d></th>
+						<th class="{{checkSort('dinar')}}" id="dinar" ng-click="sorting('dinar')"><d>dinar</d></th>
+						<th class="{{checkSort('in_dollar')}}" id="in_dollar" ng-click="sorting('in_dollar')"><d>in_dollar</d></th>
+						<th class="{{checkSort('date')}}" id="date" ng-click="sorting('date')"><d>date</d></th>
+						<th class="{{checkSort('detail')}}" id="detail" ng-click="sorting('detail')"><d>detail</d></th>
+						<th class="{{checkSort('depp_balance')}}" id="balance" ng-click="sorting('depp_balance')"><d>balance</d></th>
+						<th><d>action</d></th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- balance		
+					user -->
+					<tr ng-repeat="item in accountList">
+						<td>{{item.id}}</td>
+						<td>{{item.user}}</td>
+						<td>{{item.account}}</td>
+						<td>{{item.type}}</td>
+						<td>{{item.in_out}}</td>
+						<td>{{item.dollar}}</td>
+						<td>{{item.dinar}}</td>
+						<td>{{item.in_dollar}}</td>
+						<td>{{item.date}}</td>
+						<td>{{item.detail}}</td>
+						<td>{{item.depp_balance | currency :'$':2}}</td>
+						<td>
+							<div class="btnBoxDsh">		
+								<button class="btn btn-warning btn-xs noPrint" data-toggle="modal" data-target="#appModal" ng-click="edit(item)"><d>edit<default/d></button>
+								<button class="btn btn-danger btn-xs noPrint" data-toggle="modal" data-target="#appModal" ng-click="delete(item)"><d>delete</d></button>
+								<!-- <button class="btn btn-success btn-xs noPrint" data-toggle="modal" ng-click="card(item)"><d>view</d></button> -->
+							</div>
+						</td>
+					</tr>
+				</table>
+
+				<nav class="">
+					<div class="countTable col-md-4"><d>Count</d>: {{count}}</div>  
+					<div class="col-md-8 noPrint">
+						<ul class="pagination">
+							<li ng-show="(page - 1) > 0" ng-click="goPage(page - 1)">
+								<a aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+							<li ng-show="(page - 2) > 0" ng-click="goPage(page - 2)"><a>{{page - 2}}</a></li>
+							<li ng-show="(page - 1) > 0" ng-click="goPage(page - 1)"><a>{{page - 1}}</a></li>
+							<li ng-show="(page) > 0" ng-click="goPage(page)"><a>{{page}}</a></li>
+							<li ng-show="(page) < count / limit" ng-click="goPage(page + 1)"><a>{{page + 1}}</a></li>
+							<li ng-show="(page + 1) < count / limit" ng-click="goPage(page + 2)"><a>{{page + 2}}</a></li>
+							<li ng-show="(page) < count / limit" ng-click="goPage(page + 1)">
+								<a aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+							<!-- <li><a><span aria-hidden="true">|</span></a></li> -->
+							<li class="limitValue">		
+								<div class="btn-group dropup">
+									<button type="button" class="btn btn-default">{{limit}}</button>
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu">
+										<li><a ng-click="updateLimit(25)">25</a></li>
+										<li><a ng-click="updateLimit(100)">100</a></li>
+										<li><a ng-click="updateLimit(500)">500</a></li>
+										<li><a ng-click="updateLimit('10000')">10,000</a></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</nav>
+
+
+			</div><!-- /.box-body -->
+		</div><!-- /.box -->
+	</section>
+
+	<div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-labelledby="DiakoModal">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="appModalLabel">{{modalTitle}}</h4>
+				</div>
+				<div class="modal-body">
+					<form name="mForm">
+						<div class="form-group">
+							<label for="type" class="control-label"><d>account</d>:</label>
+							<!-- <select class="form-control" id="payAccount" ng-options="option.name for option in accountPayList track by option.id" ng-model="modal.id_account_other" name="payAccount">
+						</select> -->
+
+						<select class="form-control" id="payAccount" ng-model="modal.id_account_other" name="payAccount">
+							<option ng-repeat="option in accountPayList" value="{{option.id}}">{{option.name}}</option>	
+						</select>
+
+
+					</div>
+					<div class="form-group">
+						<label for="dollar" class="control-label"><d>dollar</d>:</label>
+						<input type="number" class="form-control" id="dollar" ng-model="modal.dollar">
+					</div>
+					<div class="form-group">
+						<label for="dinar" class="control-label"><d>dinar</d>:</label>
+						<input type="number" class="form-control" id="dinar" ng-model="modal.dinar">
+					</div>
+					<div class="form-group">
+						<label for="type" class="control-label"><d>type</d>:</label>
+						<select class="form-control" id="type" ng-model="modal.type" name="type">
+							<option value="payout"><d>payout</d></option>	
+							<option value="payin"><d>payin</d></option>
+							<option value="buy"><d>buy</d></option>
+							<option value="give_debt"><d>give_debt</d></option>
+							<option value="get_debt"><d>get_debt</d></option>
+							<option value="expense"><d>expense</d></option>
+							<option value="sell"><d>sell</d></option>
+							<option value="drawing"><d>drawing</d></option>
+							<option value="equipment"><d>equipment</d></option>
+							<option value="edit_buy"><d>edit_buy</d></option>
+							<option value="edit_sell"><d>edit_sell</d></option>
+							<option value="transfer"><d>transfer</d></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="detail" class="control-label"><d>detail</d>:</label>
+						<input type="text" class="form-control" id="detail" ng-model="modal.detail">
+					</div>
+				</form>
+				<div>
+					<p ng-repeat="m in errorMessage" class="bg-warning modalError">{{dic(m)}}</p>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal"><d>close</d></button>
+				<button type="button" class="btn btn-primary" ng-click="saveModal()" ng-hide="modalType == 'delete'" ng-disabled="!mForm.$valid || lockForm"><d>save</d></button>
+				<button type="button" class="btn btn-danger" ng-click="saveModal()" ng-show="modalType == 'delete'"  ng-disabled="lockForm"><d>delete</d></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="transferModal" tabindex="-1" role="dialog" aria-labelledby="DiakoModal">
+	<div class="modal-dialog modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="appModalLabel"><d>AddTransaction</d></h4>
+			</div>
+			<div class="modal-body">
+				<form name="mForm">
+					<div class="col-md-6">
+						<h3><d>From</d></h3>
+						<div class="form-group">
+							<label for="fromType" class="control-label"><d>AccountType</d>:</label>
+							<select class="form-control" id="fromType" ng-model="trn.fromType" name="fromType" ng-change="getAccounts('from',trn.fromType)">
+								<option value="partner">Partner</option>
+								<option value="company">Company</option>
+								<option value="customer">Customer</option>
+								<option value="partner">Partner</option>
+								<option value="expense">Expense</option>
+								<option value="store">Store</option>
+								<option value="cash">Cash</option>
+								<option value="drawing">Drawing</option>
+								<option value="equipment">Equipment</option>
+								<option value="noAccount">NoAccount</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="account" class="control-label"><d>account</d>:</label>
+							<select class="form-control" id="account" ng-model="trn.from_id_account" name="account" ng-change="getLastBalance('from',trn.from_id_account)">
+								<option ng-repeat="account in fromAccountList" value="{{account.id}}">{{account.name}}</option>								
+							</select>
+						</div>
+						<p>{{fromLastBalance}}</p>
+					</div>
+					<div class="col-md-6">
+						<h3><d>To</d></h3>
+						<div class="form-group">
+							<label for="toType" class="control-label"><d>AccountType</d>:</label>
+							<select class="form-control" id="toType" ng-model="trn.toType" name="toType" ng-change="getAccounts('to',trn.toType)">
+								<option value="partner">Partner</option>
+								<option value="company">Company</option>
+								<option value="customer">Customer</option>
+								<option value="partner">Partner</option>
+								<option value="expense">Expense</option>
+								<option value="store">Store</option>
+								<option value="cash">Cash</option>
+								<option value="drawing">Drawing</option>
+								<option value="equipment">Equipment</option>
+								<option value="noAccount">NoAccount</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="account" class="control-label"><d>account</d>:</label>
+							<select class="form-control" id="account" ng-model="trn.to_id_account" name="account" ng-change="getLastBalance('to',trn.to_id_account)">
+								<option ng-repeat="account in toAccountList" value="{{account.id}}">{{account.name}}</option>								
+							</select>
+						</div>
+						<p>{{toLastBalance}}</p>
+					</div>
+					<div class="col-md-12">						
+						<div class="col-md-2">
+							<div class="form-group">
+								<label for="detail" class="control-label"><d>Description</d>:</label>
+							</div>
+						</div>
+						<div class="col-md-10">
+							<div class="form-group">
+								<input type="text" class="form-control" id="detail" ng-model="trn.detail">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-10 col-md-offset-1">
+						<h3><d>DollarRate</d>: {{trn.dollarRate | currency:" ":0}}</h3>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="dollar" class="control-label"><d>dollar</d>:</label>
+							<input type="number" class="form-control" id="dollar" ng-model="trn.dollar">
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="dinar" class="control-label"><d>dinar</d>:</label>
+							<input type="number" class="form-control" id="dinar" ng-model="trn.dinar" >
+						</div>
+					</div>
+
+					<div class="col-md-10 col-md-offset-1">
+						<h3><d>inDollar</d>: {{trn.dollar + trn.dinar / trn.dollarRate | currency:"$":2}}</h3>
+					</div>
+				</form>
+				<div class="row">
+					<div class="col-md-12">
+						<p ng-repeat="m in errorMessage" class="bg-warning modalError">{{dic(m.field)}} - {{dic(m.content)}} {{m.extra}}</p>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal"><d>close</d></button>
+				<button type="button" class="btn btn-primary" ng-click="saveTrn()" ng-disabled="!mForm.$valid || lockForm"><d>save</d></button>
+			</div>
+		</div>
+	</div>
+</div>
