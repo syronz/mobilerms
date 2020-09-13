@@ -50,12 +50,13 @@ class indepp extends database{
 
 			foreach ($v['items'] as $key => $value) {
 				if($value['id_product']['id']){
-					$sql = "INSERT INTO indepp_extra(id_indepp,id_product,qty,cost,detail,toll) VALUES('$lastIndeppId','{$value['id_product']['id']}','{$value['qty']}','{$value['cost']}','{$value['description']}','{$value['toll']}');";
+          $sql = "INSERT INTO indepp_extra(id_indepp,id_product,qty,cost,detail,toll,serial) 
+            VALUES('$lastIndeppId','{$value['id_product']['id']}','{$value['qty']}','{$value['cost']}','{$value['description']}','{$value['toll']}','{$value['code']}');";
 					$this->pdo->query($sql);
 				}
 				if($v['type'] == 'active' || $v['type'] == 'freeze'){
 					$product->updateProductPriceBuy($value['id_product']['id'],$value['qty'],$value['cost']+$value['toll']);
-					$store->add($value['id_product']['id'],$v['id_depp'],$value['qty']);
+					$store->add($value['id_product']['id'],$v['id_depp'],$value['qty'], $value['code']);
 				}
 			}
 
@@ -303,7 +304,7 @@ class indepp extends database{
 			$row['base'] = $result->fetch(PDO::FETCH_ASSOC);
 			// $row['base']['date'] = 'بەروار: 2015-12-29 11:25:01'
 
-			$sql = "SELECT p.name as product,m.name as model,i.qty,i.cost,i.detail as description,p.code as code,b.name as brand, i.toll FROM indepp_extra i inner join product p on p.id = i.id_product left join model m on m.id = p.id_model inner join brand b on b.id = p.id_brand WHERE i.id_indepp = '$id'";
+			$sql = "SELECT p.name as product,m.name as model,i.qty,i.cost,i.detail as description,i.serial as code,b.name as brand, i.toll FROM indepp_extra i inner join product p on p.id = i.id_product left join model m on m.id = p.id_model inner join brand b on b.id = p.id_brand WHERE i.id_indepp = '$id'";
 			$result = $this->pdo->query($sql);
 			$row['items'] = $result->fetchAll(PDO::FETCH_ASSOC);
 

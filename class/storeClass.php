@@ -8,9 +8,9 @@ class store extends database{
 	'depp'=>['source'=>'id_depp','target'=>'id','column'=>'name','search'=>['name']]
 	];
 
-	function add($idProduct,$idDepp,$qty){
+	function add($idProduct,$idDepp,$qty, $code){
 		try{
-			$sql = "SELECT id FROM store WHERE id_depp = '$idDepp' AND id_product = '$idProduct'";
+			$sql = "SELECT id FROM store WHERE id_depp = '$idDepp' AND id_product = '$idProduct' AND serial = '$code' ";
 			$result = $this->pdo->query($sql);
 			$idStore = $result->fetch(PDO::FETCH_ASSOC)['id'];
 
@@ -19,7 +19,7 @@ class store extends database{
 				$this->pdo->query($sql);
 			}
 			else{
-				$sql = "INSERT INTO store(id_depp,id_product,qty) VALUES($idDepp,$idProduct,$qty)";
+				$sql = "INSERT INTO store(id_depp,id_product,qty, serial) VALUES($idDepp,$idProduct,$qty, $code)";
 				$this->pdo->query($sql);
 			}	
 			return true;
@@ -28,9 +28,9 @@ class store extends database{
 		}
 	}
 
-	function remove($idProduct,$idDepp,$qty){
+	function remove($idProduct,$idDepp,$qty, $code){
 		try{
-			$sql = "SELECT id FROM store WHERE id_depp = '$idDepp' AND id_product = '$idProduct'";
+			$sql = "SELECT id FROM store WHERE id_depp = '$idDepp' AND id_product = '$idProduct' AND serial = '$code' ";
 			$result = $this->pdo->query($sql);
 			$idStore = $result->fetch(PDO::FETCH_ASSOC)['id'];
 

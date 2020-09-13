@@ -1,7 +1,7 @@
 <table class="table table-striped" align="center" >
 	<tr>
 		<th></th>
-		<!-- <th style="width:100px;"><d>Code</d></th> -->
+		<th style="width:200px;"><d>Serial</d></th>
 		<!-- <th><d>Category</d></th> -->
 		<th><d>Brand</d></th>
 		<th><d>Product</d></th>
@@ -14,7 +14,7 @@
 	</tr>
 	<tr ng-repeat="item in invoice.items" jq-animate="dropdown;250">
 		<td><a href ng-click="removeItem(item)" class="btn btn-danger btn-sm">x</a></td>
-		<!-- <td><input type="text" class="form-control" ng-model="item.code" ng-keypress="codeChange($event,item)" placeholder="Code"></td> -->
+		<td><input type="text" class="form-control" ng-model="item.code" ng-keypress="codeChange($event,item)" placeholder="Serial"></td>
 		<td>
 			<select class="form-control" id="brand" ng-options="brand.name for brand in brandList track by brand.id" ng-change="updateProductList(item)" ng-model="item.id_brand" name="brand" ></select>
 		</td>

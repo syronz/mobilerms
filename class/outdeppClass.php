@@ -55,11 +55,12 @@ class outdepp extends database{
 
 				if($value['id_product']['id']){
 					$profitOne = $value['cost'] - $productInfo['price_buy'];
-					$sql = "INSERT INTO outdepp_extra(id_outdepp,id_product,qty,cost,detail,profit_one) VALUES('$lastOutdeppId','{$value['id_product']['id']}','{$value['qty']}','{$value['cost']}','{$value['description']}','$profitOne');";
+          $sql = "INSERT INTO outdepp_extra(id_outdepp,id_product,qty,cost,detail,profit_one, serial) 
+            VALUES('$lastOutdeppId','{$value['id_product']['id']}','{$value['qty']}','{$value['cost']}','{$value['description']}','$profitOne', '{$value['code']}');";
 					$this->pdo->query($sql);
 				}
 				if($v['type'] == 'active' || $v['type'] == 'freeze'){
-					if(!$store->remove($value['id_product']['id'],$v['id_depp'],$value['qty']))
+					if(!$store->remove($value['id_product']['id'],$v['id_depp'],$value['qty'], $value['code']))
 						return json_encode(['result'=>false,'message'=>[['field'=>'','content'=>'Error','extra'=>'This Item not exist in store']]]);
 				}
 			}
@@ -293,7 +294,17 @@ class outdepp extends database{
 
 			$row['base']['pre_balance'] = floatval($account->lastBalanceBeforeDate($row['base']['id_account'],$row['base']['id_depp'],$row['base']['date'])['depp_balance']);
 
-			$sql = "SELECT p.name as product,m.name as model,i.qty,i.cost,i.detail as description,p.code as code,b.name as brand FROM outdepp_extra i inner join product p on p.id = i.id_product left join model m on m.id = p.id_model inner join brand b on b.id = p.id_brand WHERE i.id_outdepp = '$id'";
+			$sql = "SELECT p.name as product,m.name as model,i.qty,i.cost,i.detail as description,i.serial as code,b.name as brand FROM outdepp_extra i inner join product p on p.id = i.id_product left join model m on m.id = p.id_model inner join brand b on b.id = p.id_brand WHERE i.id_outdepp = '$id'";
+
+
+      /* $sql = "SELECT p.name as product,m.name as model,i.qty,i.cost,i.detail as description, */
+      /*   s.serial as code,b.name as brand FROM outdepp_extra i */ 
+      /*   inner join product p on p.id = i.id_product */ 
+      /*   left join model m on m.id = p.id_model */ 
+      /*   inner join brand b on b.id = p.id_brand */ 
+      /*   inner join store s on s.id_product = p.id */
+      /*   WHERE i.id_outdepp = '$id'"; */
+
 			$result = $this->pdo->query($sql);
 			$row['items'] = $result->fetchAll(PDO::FETCH_ASSOC);
 

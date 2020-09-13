@@ -130,7 +130,14 @@ class product extends database{
 	function productBycode($code){
 		try{
 			$code = $this->toSave($code);
-			$sql = "SELECT p.id as id_product,p.name as product,p.price as cost,m.name as model,b.name as brand,b.id as id_brand,m.id as id_model,p.price_buy  FROM product p left join model m on m.id = p.id_model inner join brand b on b.id = p.id_brand WHERE p.code = '$code'";
+			/* $sql = "SELECT p.id as id_product,p.name as product,p.price as cost,m.name as model,b.name as brand,b.id as id_brand,m.id as id_model,p.price_buy  FROM product p left join model m on m.id = p.id_model inner join brand b on b.id = p.id_brand WHERE p.code = '$code'"; */
+      $sql = "SELECT p.id as id_product,p.name as product,p.price as cost,m.name as 
+        model,b.name as brand,b.id as id_brand,m.id as id_model,p.price_buy  
+        FROM product p 
+        left join model m on m.id = p.id_model 
+        inner join brand b on b.id = p.id_brand 
+        inner join store s on s.id_product = p.id
+        WHERE s.serial = '$code' AND s.qty > 0";
 			$result = $this->pdo->query($sql);
 			$rows = $result->fetch(PDO::FETCH_ASSOC);
 			return json_encode($rows);
