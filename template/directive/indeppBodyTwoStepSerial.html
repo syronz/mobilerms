@@ -1,0 +1,62 @@
+<table class="table table-striped" align="center" >
+	<tr>
+		<th></th>
+		<th style="width:200px;"><d>Serial</d></th>
+		<!-- <th><d>Category</d></th> -->
+		<th><d>Brand</d></th>
+		<th><d>Product</d></th>
+		<th style="width:80px;"><d>Qty</d></th>
+		<th><d>Cost</d></th>
+		<th><d>Toll</d></th>
+		<th style="width:100px;"><d>priceBuy</d></th>
+		<th><d>description</d></th>
+		<th style="width:100px;"><p>Total</p></th>
+	</tr>
+	<tr ng-repeat="item in invoice.items" jq-animate="dropdown;250">
+		<td><a href ng-click="removeItem(item)" class="btn btn-danger btn-sm">x</a></td>
+		<!-- <td><input type="text" class="form-control" ng-model="item.code" ng-keypress="codeChange($event,item)" placeholder="Serial"></td> -->
+    <td> 
+      <textarea rows="20" class="form-control" ng-model="item.code" placeholder="Serial"></textarea>
+    </td>
+		<td>
+			<select class="form-control" id="brand" ng-options="brand.name for brand in brandList track by brand.id" ng-change="updateProductList(item)" ng-model="item.id_brand" name="brand" ></select>
+		</td>
+
+		<td>
+			<select class="form-control" id="product" ng-options="product.name for product in item.productList track by product.id" ng-change="updatePrice(item)" ng-model="item.id_product" name="product" ></select>
+		</td>
+		<td><input class="form-control" ng-model="item.qty" size="4" ng-required ng-validate="integer" placeholder="qty"></td>
+		<td><input class="form-control" ng-model="item.cost" ng-required ng-validate="number" size="6" placeholder="cost"></td>
+		<td><input class="form-control" ng-model="item.toll" ng-validate="number" size="6" placeholder="toll"></td>
+		<td><input style="text-align:right;" class="form-control" value="{{item.price_buy | currency}}" disabled></td>
+		<td><input class="form-control" ng-model="item.description" type="text" size="6" placeholder="description"></td>
+
+
+
+		<td align="right"><input style="text-align:right;" class="form-control" value="{{item.cost * item.qty +  item.toll * item.qty | currency}}" disabled> </td>
+
+	</tr>
+	<tr ng-hide="printMode">
+		<td colspan="10"><a class="btn btn-primary btn-sm" href ng-click="addItem()" > + </a></td>
+	</tr>
+	<tr>
+		<td colspan="5" align="left" ng-class="tr">
+			<d>Rate</d> {{invoice.dollarRate}} 
+			<d>isEqualTo</d><strong> {{invoice.dollarRate * calculate_grand_total() | currency:'IQD ':0}} </strong>
+		</td>
+		<td colspan="4" align="right">
+			<d>SubTotal</d>:
+		</td>
+		<td align="right">
+			{{calculate_grand_total() | currency}}
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="right">
+			<d>Detail</d>:
+		</td>
+		<td colspan="8"align="right">
+			<input class="form-control" ng-model="invoice.detail" type="text" >
+		</td>
+	</tr>
+</table>

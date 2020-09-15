@@ -10,18 +10,32 @@ class store extends database{
 
 	function add($idProduct,$idDepp,$qty, $code){
 		try{
-			$sql = "SELECT id FROM store WHERE id_depp = '$idDepp' AND id_product = '$idProduct' AND serial = '$code' ";
-			$result = $this->pdo->query($sql);
-			$idStore = $result->fetch(PDO::FETCH_ASSOC)['id'];
 
-			if($idStore){
-				$sql = "UPDATE store SET qty = qty + $qty WHERE id = $idStore;";
-				$this->pdo->query($sql);
-			}
-			else{
-				$sql = "INSERT INTO store(id_depp,id_product,qty, serial) VALUES($idDepp,$idProduct,$qty, $code)";
-				$this->pdo->query($sql);
-			}	
+      $codeArr = explode("\n", $code);
+      /* dsh($codeArr); */
+      
+      if (count($codeArr) > 1) {
+        if (count($codeArr) !=  $qty) {
+          return false;
+        } else {
+          $qty = 1;
+        }
+      }
+
+      foreach($codeArr as $el) {
+        $sql = "SELECT id FROM store WHERE id_depp = '$idDepp' AND id_product = '$idProduct' AND serial = '$el' ";
+        $result = $this->pdo->query($sql);
+        $idStore = $result->fetch(PDO::FETCH_ASSOC)['id'];
+
+        if($idStore){
+          $sql = "UPDATE store SET qty = qty + $qty WHERE id = $idStore;";
+          $this->pdo->query($sql);
+        }
+        else{
+          $sql = "INSERT INTO store(id_depp,id_product,qty, serial) VALUES($idDepp,$idProduct,$qty, $el)";
+          $this->pdo->query($sql);
+        }	
+      }
 			return true;
 		}catch(PDOEXCEPTION $e){
 			dsh($e);

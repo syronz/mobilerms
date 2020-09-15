@@ -278,6 +278,10 @@ diakoApp.config(function($routeProvider) {
 		templateUrl : 'template/indepp_mobile_new.html',
 		controller  : 'indepp_mobileController'
 	})
+	.when('/indepp_mobile_serial/new', {
+		templateUrl : 'template/indepp_mobile_new_serial.html',
+		controller  : 'indepp_mobileController'
+	})
 	.when('/indepp_mobile/:id', {
 		templateUrl : 'template/indepp_print_two_step.html',
 		controller  : 'indepp_mobileController'

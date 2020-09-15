@@ -50,9 +50,24 @@ class indepp extends database{
 
 			foreach ($v['items'] as $key => $value) {
 				if($value['id_product']['id']){
-          $sql = "INSERT INTO indepp_extra(id_indepp,id_product,qty,cost,detail,toll,serial) 
-            VALUES('$lastIndeppId','{$value['id_product']['id']}','{$value['qty']}','{$value['cost']}','{$value['description']}','{$value['toll']}','{$value['code']}');";
-					$this->pdo->query($sql);
+          $codeArr = explode("\n", $value['code']);
+          /* dsh($codeArr); */
+          $qty = $value['qty'];
+          
+          
+          if (count($codeArr) > 1) {
+            if (count($codeArr) !=  $qty) {
+              return false;
+            } else {
+              $qty = 1;
+            }
+          }
+
+          foreach($codeArr as $el) {
+              $sql = "INSERT INTO indepp_extra(id_indepp,id_product,qty,cost,detail,toll,serial) 
+                VALUES('$lastIndeppId','{$value['id_product']['id']}','{$qty}','{$value['cost']}','{$value['description']}','{$value['toll']}','{$el}');";
+              $this->pdo->query($sql);
+          }
 				}
 				if($v['type'] == 'active' || $v['type'] == 'freeze'){
 					$product->updateProductPriceBuy($value['id_product']['id'],$value['qty'],$value['cost']+$value['toll']);
@@ -134,6 +149,8 @@ class indepp extends database{
 		// reset priceBuy for old items
 		$totalOldCompany = 0;
 		foreach ($oldItems as $key => $value) {
+      $sql = "DELETE FROM store WHERE serial = '{$value['serial']}'"	;
+      $result = $this->pdo->query($sql);
 			$totalOldCompany += $value['qty'] * $value['cost'];
 			$product->resetProductPriceBuy($value['id_product'],$value['qty'],$value['cost']+$value['toll']);
 		}
@@ -151,13 +168,15 @@ class indepp extends database{
 
 		// insert new item to invoice,update price_buy and add products to store
 		foreach ($v['items'] as $key => $value) {
+
 			if($value['id_product']['id']){
-				$sql = "INSERT INTO indepp_extra(id_indepp,id_product,qty,cost,detail,toll) VALUES('$idIndepp','{$value['id_product']['id']}','{$value['qty']}','{$value['cost']}','{$value['description']}','{$value['toll']}');";
+        $sql = "INSERT INTO indepp_extra(id_indepp,id_product,qty,cost,detail,toll, serial) 
+          VALUES('$idIndepp','{$value['id_product']['id']}','{$value['qty']}','{$value['cost']}','{$value['description']}','{$value['toll']}','{$value['code']}');";
 				$this->pdo->query($sql);
 			}
 			if($v['type'] == 'active' || $v['type'] == 'freeze'){
 				$product->updateProductPriceBuy($value['id_product']['id'],$value['qty'],$value['cost']+$value['toll']);
-				$store->add($value['id_product']['id'],$v['id_depp'],$value['qty']);
+				$store->add($value['id_product']['id'],$v['id_depp'],$value['qty'], $value['code']);
 			}
 		}
 
@@ -384,7 +403,7 @@ class indepp extends database{
 			$result = $this->pdo->query($sql);
 			$row['base'] = $result->fetch(PDO::FETCH_ASSOC);
 
-			$sql = "SELECT p.name as product,m.name as model,i.qty,i.cost,i.detail as description,p.code as code,b.name as brand,b.id as id_brand,m.id as id_model,p.id as id_product,i.toll FROM indepp_extra i inner join product p on p.id = i.id_product left join model m on m.id = p.id_model inner join brand b on b.id = p.id_brand WHERE i.id_indepp = '$id'";
+			$sql = "SELECT p.name as product,m.name as model,i.qty,i.cost,i.detail as description,i.serial as code,b.name as brand,b.id as id_brand,m.id as id_model,p.id as id_product,i.toll FROM indepp_extra i inner join product p on p.id = i.id_product left join model m on m.id = p.id_model inner join brand b on b.id = p.id_brand WHERE i.id_indepp = '$id'";
 			$result = $this->pdo->query($sql);
 			$row['items'] = $result->fetchAll(PDO::FETCH_ASSOC);
 
