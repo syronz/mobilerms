@@ -90,6 +90,7 @@
 				<table class="" align="center" border="0" cellspacing="0" style="width:100%;margin-top:0.3cm; ">
 					<tr style="background-color: #0072FF; color:white;">
 						<th></th>
+						<th><d>Serial</d></th>
 						<th><d>Brand</d></th>
 						<th><d>Product</d></th>
 						<th><d>Qty</d></th>
@@ -98,6 +99,7 @@
 					</tr>
 					<tr ng-repeat="item in invoicePrint.items" class="gray{{$index%2}}">
 						<td>{{$index + 1}}</td>
+						<td>{{item.code}}</td>
 						<td>{{item.brand}}</td>
 						<td>{{item.product}} {{item.description}}</td>
 						<td>{{item.qty}}</td>

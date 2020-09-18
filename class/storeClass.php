@@ -32,7 +32,7 @@ class store extends database{
           $this->pdo->query($sql);
         }
         else{
-          $sql = "INSERT INTO store(id_depp,id_product,qty, serial) VALUES($idDepp,$idProduct,$qty, $el)";
+          $sql = "INSERT INTO store(id_depp,id_product,qty, serial) VALUES($idDepp,$idProduct,$qty, '$el')";
           $this->pdo->query($sql);
         }	
       }
@@ -190,7 +190,12 @@ class store extends database{
 			// $idDepp = $_SESSION['idDepp'];
 
 
-			$sql = "SELECT s.id,s.id_depp,s.id_product, concat(d.name,' ',d.code) AS depp, cat.name AS cat,br.name AS brand,m.name AS model,p.name AS product,p.code,s.qty,p.price_buy,s.qty*p.price_buy as total FROM store s INNER JOIN depp d ON d.id = s.id_depp INNER JOIN product p ON p.id = s.id_product  INNER JOIN brand br ON br.id = p.id_brand INNER JOIN cat ON cat.id = br.id_cat LEFT JOIN model m on m.id = p.id_model WHERE s.qty <> 0  ORDER BY total desc";
+      $sql = "SELECT s.id,s.serial, s.id_depp,s.id_product, concat(d.name,' ',d.code) AS depp, 
+        cat.name AS cat,br.name AS brand,m.name AS model,p.name AS product,p.code,s.qty,
+        p.price_buy,s.qty*p.price_buy as total FROM store s INNER JOIN depp d ON d.id = s.id_depp 
+        INNER JOIN product p ON p.id = s.id_product  INNER JOIN brand br ON br.id = p.id_brand 
+        INNER JOIN cat ON cat.id = br.id_cat LEFT JOIN model m on m.id = p.id_model 
+        WHERE s.qty <> 0  ORDER BY total desc";
 			$result = $this->pdo->query($sql);
 			$r['rows'] = $result->fetchAll(PDO::FETCH_ASSOC);
 			$r['rows'] = $this->entityDecode($r['rows']);

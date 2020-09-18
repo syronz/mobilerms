@@ -410,7 +410,7 @@ var w = {
 	Paid : {"ar":"","ku":"پارەی دراو","en":"Paid"},
 	days : {"ar":"","ku":"رۆژ","en":"days"},
 	darham_rate : {"ar":"","ku":"درهم","en":"Darham Rate"},
-	m : {"ar":"","ku":"","en":""},
+	Serial : {"ar":"serial","ku":"سریال","en":"serial"},
 	m : {"ar":"","ku":"","en":""},
 	m : {"ar":"","ku":"","en":""},
 	m : {"ar":"","ku":"","en":""},
