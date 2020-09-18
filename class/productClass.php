@@ -150,7 +150,7 @@ class product extends database{
 	function productListByBrand($idBrand){
 		try{
 			$idBrand = $this->toSave($idBrand);
-			$sql = "SELECT * FROM product WHERE id_brand = '$idBrand'";
+			$sql = "SELECT * FROM product WHERE id_brand = '$idBrand' order by name";
 			$result = $this->pdo->query($sql);
 			$rows = $result->fetchAll(PDO::FETCH_ASSOC);
 			return json_encode($rows);

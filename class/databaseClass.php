@@ -17,7 +17,7 @@ function dsh(){
 	// var_dump($argList);
 	echo '<pre style="color:red">';
 	foreach($argList as $key => $v){
-
+		
 		$backtrace = debug_backtrace();
 		// var_dump($backtrace[0]);
 		echo $backtrace[0]['file'].' ('.$backtrace[0]['line'].')   ';
@@ -26,7 +26,7 @@ function dsh(){
 		$result = ob_get_clean();
 		$result = str_replace(">\n", '>', $result);
 		echo $result;
-
+		
 	}
 	echo '</pre><hr>';
 }
@@ -44,7 +44,7 @@ class database{
 			$this->pdoLog = new PDO('mysql:host=127.0.0.1;dbname='.setting::DATABASE_LOG, setting::USER_DATABASE, setting::MYSQL_PASSWORD);
 			$this->pdoLog->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$this->pdoLog->query('SET NAMES utf8');
-		}
+		} 
 		catch (PDOException $e) {
 			print "Error!: " . $e->getMessage() . "<br/>";
 			die();
@@ -376,9 +376,9 @@ function toSave($data){
 				$result = $result && $vCheck['result'];
 				foreach ($vCheck['message'] as $value) {
 					array_push($messages, $value);
-				}
+				}	
 			}
-
+			
 		}
 		return ['result'=>$result,'message'=>$messages];
 	}
@@ -404,7 +404,7 @@ function toSave($data){
 				$num = substr($num, 2,strlen($num));
 			}
 			return $newNum;
-
+			
 		}
 		catch(EXCEPTION $e){
 			dsh($e);
@@ -422,7 +422,7 @@ function toSave($data){
 				$num = substr($num, 2,strlen($num));
 			}
 			return $newNum;
-
+			
 		}
 		catch(EXCEPTION $e){
 			dsh($e);
