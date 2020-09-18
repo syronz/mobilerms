@@ -15,11 +15,12 @@ class store extends database{
       /* dsh($codeArr); */
       
       if (count($codeArr) > 1) {
-        if (count($codeArr) !=  $qty) {
-          return false;
-        } else {
-          $qty = 1;
-        }
+        $qty = 1;
+        /* if (count($codeArr) !=  $qty) { */
+        /*   return false; */
+        /* } else { */
+        /*   $qty = 1; */
+        /* } */
       }
 
       foreach($codeArr as $el) {
