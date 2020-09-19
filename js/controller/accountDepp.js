@@ -179,7 +179,7 @@ diakoApp.controller('accountDeppController',function($scope,$rootScope,$http,$lo
 		$scope.trn.to_id_account = '';
 		$scope.toLastBalance = '';
 		$scope.trn.dollar = '';
-		$scope.trn.dinar = '';
+		$scope.trn.dinar = 0;
 	}
 
 

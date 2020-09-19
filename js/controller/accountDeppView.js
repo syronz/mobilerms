@@ -205,7 +205,7 @@ diakoApp.controller('accountDeppViewController',function($scope,$rootScope,$http
 		$scope.trn.to_id_account = '';
 		$scope.toLastBalance = '';
 		$scope.trn.dollar = '';
-		$scope.trn.dinar = '';
+		$scope.trn.dinar = 0;
 
 		$scope.trn.fromType = $scope.accountInfo.type;
 		$scope.getAccounts('from',$scope.trn.fromType);
@@ -219,7 +219,7 @@ diakoApp.controller('accountDeppViewController',function($scope,$rootScope,$http
 		$scope.trn.from_id_account = '';
 		$scope.fromLastBalance = '';
 		$scope.trn.dollar = '';
-		$scope.trn.dinar = '';
+		$scope.trn.dinar = 0;
 
 		$scope.trn.toType = $scope.accountInfo.type;
 		$scope.getAccounts('to',$scope.trn.toType);

@@ -117,7 +117,7 @@
 			</tr>
 			<tr ng-repeat="item in invoice.items" jq-animate="dropdown;250">
 				<td><a href ng-click="removeItem(item)" class="btn btn-danger btn-sm">x</a></td>
-				<td><input class="form-control" ng-model="item.code" ng-keypress="codeChange($event,item)" placeholder="Serial"></td>
+				<td><input class="form-control barcoder" ng-model="item.code" ng-keypress="codeChange($event,item)" placeholder="Serial"></td>
 				<td>
 						<select class="form-control" id="brand" ng-options="brand.name for brand in brandList track by brand.id" ng-change="updateProductList(item)" ng-model="item.id_brand" name="brand" ></select>
 					</td>

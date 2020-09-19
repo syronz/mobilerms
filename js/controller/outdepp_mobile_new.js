@@ -157,6 +157,9 @@ diakoApp.controller('outdepp_mobile_newController',function($scope,$rootScope,$h
 
 					item.cost = data.cost;
 					item.price_buy = data.price_buy;
+          
+          $scope.addItem();
+          
 				}).
 				error(function(data, status, headers, config) {
 					$log.info(data);
@@ -170,6 +173,11 @@ diakoApp.controller('outdepp_mobile_newController',function($scope,$rootScope,$h
 
 	$scope.addItem = function() {
 		$scope.invoice.items.push({qty:1, cost:0, description:"",id_brand:0,id_model:0});    
+    setTimeout(function(){
+      const barcods = document.querySelectorAll(".barcoder:last-child");
+      const lastBarcode = barcods[barcods.length - 1];
+      lastBarcode.focus();
+    }, 250);
 	}
 	
 	$scope.removeItem = function(item) {
