@@ -316,6 +316,10 @@ diakoApp.config(function($routeProvider) {
 		templateUrl : 'template/outdepp_mobile_print_partner.html',
 		controller  : 'outdepp_mobileController'
 	})
+	.when('/outdepp_mobile/:id/noprice', {
+		templateUrl : 'template/outdepp_mobile_print_partner_noprice.html',
+		controller  : 'outdepp_mobileController'
+	})
 	.when('/outdepp_mobile/edit/:id', {
 		templateUrl : 'template/outdepp_mobile_edit.html',
 		controller  : 'outdepp_mobile_editController'

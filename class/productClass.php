@@ -43,7 +43,10 @@ class product extends database{
 		if(!$vCheck1['result'])
 			return json_encode($vCheck1);
 
-		$this->editDefault($this->table,$v,$this->struct);
+		/* $this->editDefault($this->table,$v,$this->struct); */
+    $sql = "UPDATE product SET name = '{$v['name']}', price = '{$v['price']}' WHERE id = {$v['id']}";
+    $this->pdo->query($sql);
+
 
 		$this->record($this->table,'edit','',$v['id'],['new'=>$v,'old'=>$old]);
 		return json_encode(['result'=>true]);

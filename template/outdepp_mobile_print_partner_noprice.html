@@ -95,8 +95,8 @@
 						<th><d>Product</d></th>
 						<th><d>Qty</d></th>
 						<th><d>Serial</d></th>
-						<th><d>Cost</d></th>
-						<th><d>Total</d></th>
+						<!-- <th><d>Cost</d></th> -->
+						<!-- <th><d>Total</d></th> -->
 					</tr>
 					<tr ng-repeat="item in invoicePrint.items" class="gray{{$index%2}}">
 						<td>{{$index + 1}}</td>
@@ -104,9 +104,9 @@
 						<td>{{item.product}} {{item.description}}</td>
 						<td>{{item.qty}}</td>
 						<td>{{item.code}}</td>
-						<td>{{item.cost | currency}}</td>
+						<!-- <td>{{item.cost | currency}}</td> -->
 						
-						<td align="right">{{item.cost * item.qty | currency}}</td>
+						<!-- <td align="right">{{item.cost * item.qty | currency}}</td> -->
 					</tr>
 					
 					<tr>
@@ -126,36 +126,36 @@
 				<div style="clear:both;"></div>
 
 				
-				<table border="1" style="float:right; margin-top:15px;"  cellspacing="0">
-					<tr>
-						<td align="right" class="chiman" style="padding-top: 0.2cm;">
-							<d>SubTotal</d>:
-						</td>
-						<td align="right" style="padding-top: 0.2cm;">
-							{{invoicePrint.base.total | currency}}
-						</td>
-					</tr>
-					<tr>
-						<td align="right" class="chiman">
-							<d>Discount</d>: 
-						</td>
-						<td align="right">
-							({{invoicePrint.base.discount}}%) = {{(invoicePrint.base.total * invoicePrint.base.discount) / 100 | currency}}
-						</td>
-					</tr>
-					<tr>
-						<td align="right" class="chiman">
-							<d>GrandTotal</d>:
-						</td>
-						<td align="right">
-							<b>{{(100 - invoicePrint.base.discount) * invoicePrint.base.total / 100 | currency}}</b>
-						</td>
-					</tr>
-				</table>
+				<!-- <table border="1" style="float:right; margin-top:15px;"  cellspacing="0"> -->
+				<!-- 	<tr> -->
+				<!-- 		<td align="right" class="chiman" style="padding-top: 0.2cm;"> -->
+				<!-- 			<d>SubTotal</d>: -->
+				<!-- 		</td> -->
+				<!-- 		<td align="right" style="padding-top: 0.2cm;"> -->
+				<!-- 			{{invoicePrint.base.total | currency}} -->
+				<!-- 		</td> -->
+				<!-- 	</tr> -->
+				<!-- 	<tr> -->
+				<!-- 		<td align="right" class="chiman"> -->
+				<!-- 			<d>Discount</d>: --> 
+				<!-- 		</td> -->
+				<!-- 		<td align="right"> -->
+				<!-- 			({{invoicePrint.base.discount}}%) = {{(invoicePrint.base.total * invoicePrint.base.discount) / 100 | currency}} -->
+				<!-- 		</td> -->
+				<!-- 	</tr> -->
+				<!-- 	<tr> -->
+				<!-- 		<td align="right" class="chiman"> -->
+				<!-- 			<d>GrandTotal</d>: -->
+				<!-- 		</td> -->
+				<!-- 		<td align="right"> -->
+				<!-- 			<b>{{(100 - invoicePrint.base.discount) * invoicePrint.base.total / 100 | currency}}</b> -->
+				<!-- 		</td> -->
+				<!-- 	</tr> -->
+				<!-- </table> -->
 
 				
 
-				<table border="1" style="float:left; margin-top:15px;"  cellspacing="0">
+				<table border="1" style="float:right; margin-top:15px;"  cellspacing="0">
 					<tr>
 						<td align="right" class="chiman" style="padding-top: 0.2cm;">
 							<d>preBalance</d>:
