@@ -12,7 +12,7 @@ diakoApp.controller('outdepp_mobile_newController',function($scope,$rootScope,$h
 	$scope.invoice = {};
 
 	var sample_invoice = {
-		accountType : 'customer',
+		accountType : 'partner',
 		type : 'active',
 		pay : {},
 		discount: 0.00, 
@@ -105,7 +105,7 @@ diakoApp.controller('outdepp_mobile_newController',function($scope,$rootScope,$h
 		$http.post("control/outdeppCtrl.php?action=add",$scope.invoice).
 		success(function(data, status, headers, config) {
 			if(data.result){
-				$location.path('outdepp_mobile/'+data.id);
+				$location.path('outdepp_mobile/'+data.id+'/partner');
 			}
 			else{
 				console.log(data);
