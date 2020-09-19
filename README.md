@@ -13,3 +13,9 @@ Retail Management System for Mobile store, Created by AngularJS with PHP
 [x] outdepp-print should be clones and in the new version without prices, just show the old account
 [ ] add investment as account category
 [ ] add .001 to the reports
+[ ] Peyment receipts
+[ ] Name close to balance in indepp account
+[ ] Qty base invoice
+[ ] Qty base inventory
+[ ] Auto row generate in case of enter the serial
+[ ] Account list page size by default should be 500

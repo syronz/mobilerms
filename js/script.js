@@ -208,6 +208,10 @@ diakoApp.config(function($routeProvider) {
 		templateUrl : 'template/accountDeppView.html',
 		controller  : 'accountDeppViewController'
 	})
+	.when('/receiptPayment/a5/:id', {
+		templateUrl : 'template/receiptPaymentA5.html',
+		controller  : 'accountDeppViewController'
+	})
 
 	.when('/outdepp_piece/:page/:limit/:sortFiled/:sortType', {
 		templateUrl : 'template/outdepp_piece.html',
