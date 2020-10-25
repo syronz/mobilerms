@@ -5,11 +5,13 @@ diakoApp.controller('outdepp_mobile_newController',function($scope,$rootScope,$h
 
 	$rootScope.part = 'outdepp_mobile_new';
 	$rootScope.specialPrint = true;
+  $scope.lockForm = false;
 
 
 	$scope.accountList = null;
 	$scope.accountArr = [];
 	$scope.invoice = {};
+
 
 	var sample_invoice = {
 		accountType : 'partner',
@@ -144,7 +146,10 @@ diakoApp.controller('outdepp_mobile_newController',function($scope,$rootScope,$h
 			if(item.code){
 				$http.get("control/productCtrl.php?action=productBycode&code="+item.code).
 				success(function(data, status, headers, config) {
-					dsh(data);
+          // console.log("...........", data);
+          if(data == 'false'){
+            alert('Serial not exist');
+          }
 					// item.cost = data.cost;
 					// $scope.brandList = [{"id":0,"name":data.brand}];
 					item.id_brand = {"id":data.id_brand,"name":data.brand};

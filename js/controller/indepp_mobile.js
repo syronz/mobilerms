@@ -17,6 +17,7 @@ diakoApp.controller('indepp_mobileController',function($scope,$rootScope,$http,$
 	$scope.indepp_mobileList = null;
 	$rootScope.part = 'indepp_mobile';
 	$rootScope.specialPrint = true;
+  $scope.lockForm = false;
 
 	$scope.sortFiled = $routeParams.sortFiled;
 	$scope.sortType = $routeParams.sortType;
@@ -173,7 +174,7 @@ diakoApp.controller('indepp_mobileController',function($scope,$rootScope,$http,$
 
 	/*------------------------------- START invoice indepp NEW*/
 	$scope.saveInvoice = function(){
-		dsh($scope.invoice);
+    $scope.lockForm = true;
 		$http.post("control/indeppCtrl.php?action=add",$scope.invoice).
 		success(function(data, status, headers, config) {
 			if(data.result){
@@ -184,6 +185,7 @@ diakoApp.controller('indepp_mobileController',function($scope,$rootScope,$http,$
 				$scope.errorMessage = data.message;
 				$scope.errorShow = true;
 			}
+      $scope.lockForm = false;
 		}).
 		error(function(data, status, headers, config) {
 			$log.info('error',data, status, headers, config);
